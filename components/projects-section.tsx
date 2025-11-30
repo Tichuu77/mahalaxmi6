@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowRight, MapPin, Phone, Building2, Sparkles, Star, Eye } from "lucide-react"
+import { ArrowRight, MapPin, Phone, Building2, Sparkles, Star, ChevronRight } from "lucide-react"
 
 type Project = {
   id: number
@@ -30,7 +30,7 @@ const projects: {
       id: 3,
       title: "Mahalaxmi Nagar-39",
       image: "/ongoingProject5.webp",
-      description: `Katol Road Mahalaxmi  Infra Launched Project Mahalaxmi Nagar-39 This Project Located Fetri (Chicholi) New Outer Ring Road Touch Layout.`,
+      description: `Katol Road Mahalaxmi Infra Launched Project Mahalaxmi Nagar-39 This Project Located Fetri (Chicholi) New Outer Ring Road Touch Layout.`,
       location: `MOUZA - CHICHOLI`,
       status: "ongoing"
     },
@@ -74,7 +74,7 @@ Location - The Project is Situated in Mouza - Sumthana Behind Godrej Properties 
       id: 11,
       title: "Mahalaxmi Nagar - 47",
       image: "/ongoingProject12.jpg",
-      description: `Mahalaxmi  Infra New Project Launch In Koradi Road,(Nanda) This Project Located are Behind Haldiram,AM Cinema,Rokde Jwellers & Naivedyam Hotel
+      description: `Mahalaxmi Infra New Project Launch In Koradi Road,(Nanda) This Project Located are Behind Haldiram,AM Cinema,Rokde Jwellers & Naivedyam Hotel
 This Project Fully NMRDA & RL Residential Plotted Project With upto 90% Bank Finance Available.`,
       location: `MOUZA - KORADI ROAD HALDIRAM & AM CINEMA BACKSIDE`,
       status: "ongoing"
@@ -85,7 +85,7 @@ This Project Fully NMRDA & RL Residential Plotted Project With upto 90% Bank Fin
       id: 12,
       title: "Mahalaxmi Nagar - 37",
       image: "/completedProject1.webp",
-      description: `Mahalaxmi  Infra launched the project Mahalaxmi Nagar 37. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from any nationalized bank.`,
+      description: `Mahalaxmi Infra launched the project Mahalaxmi Nagar 37. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from any nationalized bank.`,
       location: `MOUZA - KOTEWADA`,
       status: "completed"
     },
@@ -93,7 +93,7 @@ This Project Fully NMRDA & RL Residential Plotted Project With upto 90% Bank Fin
       id: 13,
       title: "Mahalaxmi Nagar - 35",
       image: "/completedProject2.webp",
-      description: `Mahalaxmi  Infra launched the project Mahalaxmi Nagar 35. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from any nationalized bank.`,
+      description: `Mahalaxmi Infra launched the project Mahalaxmi Nagar 35. The layout is NIT / NMRDA sanctioned with RL. Bank finance is available 75% to 80% from any nationalized bank.`,
       location: `MOUZA - KOTEWADA`,
       status: "completed"
     },
@@ -134,9 +134,8 @@ This Project Fully NMRDA & RL Residential Plotted Project With upto 90% Bank Fin
   ]
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project }: { project: Project }) {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
 
   const statusConfig = {
     completed: { label: "Completed", color: "bg-primary" },
@@ -145,7 +144,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   }
 
   const config = statusConfig[project.status as keyof typeof statusConfig]
-  const isLarge = index % 7 === 0 // Every 7th card is large
 
   const handleWhatsApp = () => {
     const message = `Hi, I'm interested in ${project.title}. Please share more details.`
@@ -154,105 +152,86 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   }
 
   return (
-    <div 
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`group relative bg-white overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
-        isLarge ? 'rounded-3xl' : 'rounded-2xl'
-      }`}
-    >
-      {/* Diagonal split background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
+    <div className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
       
-      {/* Image section - Side by side layout for large cards */}
-      <div className={`relative ${isLarge ? 'lg:flex' : ''}`}>
-        <div className={`relative overflow-hidden ${isLarge ? 'lg:w-1/2' : 'w-full'} ${isLarge ? 'h-64 lg:h-auto' : 'h-48'}`}>
-          <img
-            src={project.image || "/placeholder.svg"}
-            alt={project.title}
-            className={`w-full h-full object-cover transition-all duration-700 ${isHovered ? 'scale-110 rotate-2' : 'scale-100'}`}
-          />
-          
-          {/* Diagonal overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/90 via-primary/50 to-transparent opacity-80"></div>
-          
-          {/* Status badge - floating */}
-          <div className="absolute top-4 right-4 z-20">
-            <div className={`${config.color} text-white px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider shadow-lg backdrop-blur-sm`}>
-              {config.label}
-            </div>
-          </div>
-
-          {/* Project number - large */}
-          <div className="absolute bottom-4 left-4 z-20">
-            <div className="text-white/30 text-6xl font-black leading-none">
-              {project.title.split('-')[1] || project.id}
-            </div>
+      {/* Image Container - Top */}
+      <div className="relative h-56 overflow-hidden">
+        <img
+          src={project.image || "/placeholder.svg"}
+          alt={project.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        
+        {/* Status Badge - Top Right */}
+        <div className="absolute top-3 right-3">
+          <div className={`${config.color} text-white px-3 py-1 rounded-full text-xs font-bold uppercase`}>
+            {config.label}
           </div>
         </div>
 
-        {/* Content section */}
-        <div className={`relative p-5 ${isLarge ? 'lg:w-1/2 lg:p-8' : ''}`}>
-          {/* Title with underline */}
-          <div className="mb-4">
-            <h3 className={`font-black text-primary mb-2 ${isLarge ? 'text-2xl lg:text-3xl' : 'text-lg'}`}>
-              {project.title}
-            </h3>
-            <div className="h-1 w-16 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
-          </div>
-
-          {/* Location - horizontal layout */}
-          {project.location && (
-            <div className="flex items-start gap-2 mb-4 p-3 bg-secondary/10 rounded-xl">
-              <MapPin className="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
-              <p className="text-xs font-semibold text-primary">{project.location}</p>
-            </div>
-          )}
-
-          {/* Description with expand */}
-          {project.description && (
-            <div className="mb-4">
-              <p className={`text-sm text-primary/70 leading-relaxed ${!isExpanded && !isLarge ? 'line-clamp-2' : ''}`}>
-                {project.description}
-              </p>
-              {!isLarge && project.description.length > 100 && (
-                <button
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className="text-secondary text-xs font-bold mt-2 flex items-center gap-1 hover:gap-2 transition-all"
-                >
-                  {isExpanded ? '− Less' : '+ More'}
-                </button>
-              )}
-            </div>
-          )}
-
-          {/* Tags - stacked layout */}
-          <div className="flex gap-2 mb-4">
-            <span className="px-3 py-1.5 bg-primary text-white text-xs font-bold rounded-lg">NMRDA</span>
-            <span className="px-3 py-1.5 bg-secondary text-white text-xs font-bold rounded-lg">90% Finance</span>
-          </div>
-
-          {/* CTA buttons - dual action */}
-          <div className="flex gap-2">
-            <button
-              onClick={handleWhatsApp}
-              className="flex-1 bg-gradient-to-r from-primary to-secondary text-white py-3 px-4 rounded-xl font-bold text-sm hover:shadow-xl transition-all flex items-center justify-center gap-2"
-            >
-              <Phone className="w-4 h-4" />
-              Contact
-            </button>
-            
+        {/* Project Number - Bottom Left */}
+        <div className="absolute bottom-3 left-3">
+          <div className="text-white text-4xl font-black">
+            {project.title.split('-')[1] || project.id}
           </div>
         </div>
       </div>
 
-      {/* Decorative corner element */}
-      <div className={`absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-primary/20 to-transparent ${isHovered ? 'scale-150' : 'scale-100'} transition-transform duration-500`}></div>
+      {/* Content - Below Image */}
+      <div className="p-5 space-y-3">
+        
+        {/* Title */}
+        <h3 className="text-xl font-black text-gray-900 group-hover:text-primary transition-colors">
+          {project.title}
+        </h3>
+
+        {/* Location */}
+        {project.location && (
+          <div className="flex items-center gap-2 text-xs text-gray-600">
+            <MapPin className="w-4 h-4 text-secondary flex-shrink-0" />
+            <span className="font-semibold line-clamp-1">{project.location}</span>
+          </div>
+        )}
+
+        {/* Description */}
+        {project.description && (
+          <div>
+            <p className={`text-sm text-gray-600 leading-relaxed ${!isExpanded ? 'line-clamp-3' : ''}`}>
+              {project.description}
+            </p>
+            {project.description.length > 150 && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-secondary text-xs font-bold mt-1 hover:underline"
+              >
+                {isExpanded ? 'Show less' : 'Read more'}
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Tags */}
+        <div className="flex gap-2 pt-2">
+          <span className="px-2 py-1 bg-primary/10 text-primary text-xs font-bold rounded">NMRDA</span>
+          <span className="px-2 py-1 bg-secondary/10 text-secondary text-xs font-bold rounded">90% Finance</span>
+        </div>
+
+        {/* CTA Button */}
+        <button
+          onClick={handleWhatsApp}
+          className="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-xl font-bold text-sm hover:shadow-lg transition-all flex items-center justify-center gap-2 group-hover:gap-3"
+        >
+          <Phone className="w-4 h-4" />
+          Contact Now
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      </div>
     </div>
   )
 }
 
-export  function ProjectsSection() {
+export   function ProjectsSection() {
   const [activeTab, setActiveTab] = useState<"all" | "completed" | "ongoing" | "upcoming">("all")
 
   const allProjects = [
@@ -267,132 +246,142 @@ export  function ProjectsSection() {
       : allProjects.filter((project) => project.status === activeTab)
 
   return (
-    <section id="projects" className="py-20 lg:py-32 bg-background relative overflow-hidden">
+    <section id="projects" className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       
-      {/* Grid pattern background */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(var(--primary) 1px, transparent 1px), linear-gradient(90deg, var(--primary) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }}></div>
-      </div>
-
-      {/* Floating orbs */}
-      <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Asymmetric header */}
-        <div className="grid lg:grid-cols-2 gap-8 items-end mb-16">
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-xl">
-                <Building2 className="w-7 h-7 text-white" />
-              </div>
-              <div className="h-px flex-1 bg-gradient-to-r from-primary to-transparent"></div>
-            </div>
-            <h2 className="text-4xl lg:text-6xl font-black text-primary mb-4 leading-tight">
-              Our Latest
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">
-                Developments
-              </span>
-            </h2>
-            <p className="text-base text-primary/70 leading-relaxed max-w-xl">
-              Premium residential projects across Nagpur's most sought-after locations
-            </p>
+        {/* Compact Top Header */}
+        <div className="text-center mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full border border-primary/20 mb-4">
+            <Building2 className="w-4 h-4 text-primary" />
+            <span className="text-sm text-primary font-bold uppercase tracking-wider">
+              Our Projects
+            </span>
           </div>
+          
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-3 leading-tight">
+            Latest{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">
+              Developments
+            </span>
+          </h2>
+          
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+            Premium residential projects across Nagpur's most sought-after locations
+          </p>
+        </div>
 
-          {/* Stats cards */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-white rounded-2xl shadow-lg border-l-4 border-primary">
-              <div className="text-3xl font-black text-primary">{projects.ongoing.length}</div>
-              <div className="text-xs text-gray-600 font-bold mt-1">Ongoing</div>
+        {/* Stats + Filters Combined Row */}
+        <div className="mb-10 sm:mb-12">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center items-center gap-3 sm:gap-4">
+            
+            {/* Stats Pills */}
+            <div className="px-4 py-2 bg-white rounded-xl shadow-md border border-gray-200 text-center">
+              <span className="text-xl sm:text-2xl font-black text-primary">{projects.ongoing.length}</span>
+              <span className="text-xs text-gray-600 font-semibold ml-1">Ongoing</span>
             </div>
-            <div className="text-center p-4 bg-white rounded-2xl shadow-lg border-l-4 border-secondary">
-              <div className="text-3xl font-black text-secondary">{projects.completed.length}</div>
-              <div className="text-xs text-gray-600 font-bold mt-1">Completed</div>
+            <div className="px-4 py-2 bg-white rounded-xl shadow-md border border-gray-200 text-center">
+              <span className="text-xl sm:text-2xl font-black text-secondary">{projects.completed.length}</span>
+              <span className="text-xs text-gray-600 font-semibold ml-1">Completed</span>
             </div>
-            <div className="text-center p-4 bg-white rounded-2xl shadow-lg border-l-4 border-tcol">
-              <div className="text-3xl font-black text-primary">{projects.upcoming.length}</div>
-              <div className="text-xs text-gray-600 font-bold mt-1">Upcoming</div>
-            </div>
+
+            {/* Divider */}
+            <div className="hidden sm:block h-8 w-px bg-gray-300"></div>
+
+            {/* Filter Tabs */}
+            {[
+              { label: "All", value: "all" },
+              { label: "Ongoing", value: "ongoing" },
+              { label: "Completed", value: "completed" },
+              { label: "Upcoming", value: "upcoming" }
+            ].map(tab => (
+              <button
+                key={tab.value}
+                onClick={() => setActiveTab(tab.value as any)}
+                className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
+                  activeTab === tab.value
+                    ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg"
+                    : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Horizontal filter tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {[
-            { label: "All Projects", value: "all" },
-            { label: "Ongoing", value: "ongoing" },
-            { label: "Completed", value: "completed" },
-            { label: "Upcoming", value: "upcoming" }
-          ].map(tab => (
-            <button
-              key={tab.value}
-              onClick={() => setActiveTab(tab.value as any)}
-              className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${
-                activeTab === tab.value
-                  ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg scale-105"
-                  : "bg-white text-primary hover:bg-gray-50 border-2 border-gray-200 hover:border-primary/30"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Masonry-style grid */}
+        {/* Simple 3-Column Grid */}
         <div>
           {filteredProjects.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-              {filteredProjects.map((project, index) => (
-                <div key={project.id} className={index % 7 === 0 ? 'lg:col-span-2' : ''}>
-                  <ProjectCard project={project} index={index} />
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProjects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           ) : (
             <div className="text-center py-20 bg-white rounded-3xl">
               <div className="text-6xl mb-4">🏗️</div>
-              <p className="text-primary font-bold text-xl">No projects found</p>
+              <p className="text-gray-600 font-bold text-xl">No projects found</p>
             </div>
           )}
         </div>
 
-        {/* Full width CTA */}
-        <div className="mt-20 bg-gradient-to-r from-primary via-secondary to-primary rounded-3xl p-10 lg:p-16 shadow-2xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20"></div>
-          
-          <div className="relative z-10 lg:flex lg:items-center lg:justify-between">
-            <div className="lg:flex-1 text-center lg:text-left mb-8 lg:mb-0">
-              <Sparkles className="w-12 h-12 text-white mx-auto lg:mx-0 mb-4" />
-              <h3 className="text-3xl lg:text-4xl font-black text-white mb-4">
+        {/* Bottom CTA - Different Style */}
+        <div className="mt-16 sm:mt-20">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border-2 border-gray-100 relative overflow-hidden">
+            
+            {/* Decorative gradient corner */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-primary/20 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            
+            <div className="relative z-10 text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary mb-6 shadow-lg">
+                <Sparkles className="w-8 h-8 text-white" />
+              </div>
+              
+              <h3 className="text-2xl sm:text-4xl font-black text-gray-900 mb-4">
                 Ready to Find Your Perfect Plot?
               </h3>
-              <p className="text-white/90 text-base max-w-xl mx-auto lg:mx-0">
+              
+              <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
                 Connect with our expert team for personalized project recommendations and exclusive deals
               </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
-              <a
-                href="#contact"
-                className="px-8 py-4 bg-white text-primary rounded-2xl font-bold hover:scale-105 transition-all shadow-xl flex items-center justify-center gap-2"
-              >
-                <Phone className="w-5 h-5" />
-                Get Started
-                <ArrowRight className="w-5 h-5" />
-              </a>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold hover:shadow-xl transition-all"
+                >
+                  <Phone className="w-5 h-5" />
+                  Get Started
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a
+                  href="tel:+919822172379"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary border-2 border-primary rounded-xl font-bold hover:bg-primary/5 transition-all"
+                >
+                  Call Now
+                  <Phone className="w-5 h-5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        .line-clamp-2 {
+        .line-clamp-3 {
           display: -webkit-box;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .line-clamp-1 {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }

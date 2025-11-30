@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, Phone, MapPin, Send, CheckCircle, Clock, Award, Sparkles } from "lucide-react"
+import { Mail, Phone, MapPin, Send, CheckCircle, Clock, Award, Sparkles, User, MessageSquare } from "lucide-react"
 
 export default function ContactSection() {
   const [formState, setFormState] = useState({
@@ -57,222 +57,135 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-20 lg:py-32 bg-gray-50 relative overflow-hidden">
       
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-15px) rotate(3deg); }
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
         }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
+        @keyframes pulse-ring {
+          0% {
+            transform: scale(0.8);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1.2);
+            opacity: 0;
+          }
+        }
+        .animate-pulse-ring {
+          animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
       `}</style>
 
-      {/* Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" style={{ animationDelay: '3s' }} />
-        <Sparkles className="absolute top-10 left-20 w-20 h-20 text-primary/5 animate-float" />
-        <Mail className="absolute bottom-10 right-20 w-24 h-24 text-secondary/5" style={{ animationDelay: '1.5s' }} />
-      </div>
+      {/* Simple Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50 to-white" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Enhanced Header */}
-        <div className="text-center mb-10 sm:mb-14 lg:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/30 mb-4">
-            <div className="w-2 h-2 bg-gradient-to-br from-primary to-secondary rounded-full animate-pulse" />
-            <span
-              style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
-              className="text-primary font-semibold text-xs sm:text-sm uppercase tracking-wider"
-            >
-              Get in Touch
-            </span>
+        {/* Header - Left Aligned */}
+        <div className="mb-12 sm:mb-16">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full animate-pulse-ring" />
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-2xl">
+                <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+              </div>
+            </div>
+            <div className="h-px flex-1 max-w-[150px] bg-gradient-to-r from-primary to-transparent" />
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-primary mb-4 leading-tight">
-            Let's Start a
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">
-              Conversation
-            </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black text-gray-900 mb-4 leading-tight">
+            Let's Connect
           </h2>
           
-          <p className="text-sm sm:text-base text-primary/70 max-w-2xl mx-auto leading-relaxed">
-            Have a question or ready to get started? We'd love to hear from you and help bring your vision to life.
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
+            Ready to start your property journey? Reach out and let's make it happen together.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        {/* Main Content - Form First on Mobile */}
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
           
-          {/* Left Side - Contact Info & Details */}
-          <div className="space-y-6">
-            
-            {/* Contact Cards */}
-            <div className="space-y-4">
-              <a 
-                href="tel:+919822172379"
-                className="group block relative overflow-hidden bg-white p-6 rounded-2xl border-2 border-primary/20 hover:border-primary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
-                <div className="relative flex items-start gap-4">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-black text-primary text-lg mb-1 flex items-center gap-2">
-                      Phone
-                      <span className="text-xs font-normal px-2 py-0.5 bg-primary/10 text-primary rounded-full">Call Now</span>
-                    </h3>
-                    <p className="text-primary group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-all font-bold text-lg">
-                     +91 9822172379
-                    </p>
-                    <p className="text-primary/60 text-sm mt-1 flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      Mon-Fri, 9am-6pm
-                    </p>
-                  </div>
-                </div>
-              </a>
-
-              <a 
-                href="mailto:rajeshgingle@gmail.com"
-                className="group block relative overflow-hidden bg-white p-6 rounded-2xl border-2 border-secondary/20 hover:border-secondary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-secondary/10 to-transparent rounded-bl-full" />
-                <div className="relative flex items-start gap-4">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-black text-primary text-lg mb-1 flex items-center gap-2">
-                      Email
-                      <span className="text-xs font-normal px-2 py-0.5 bg-secondary/10 text-secondary rounded-full">Write Us</span>
-                    </h3>
-                    <p className="text-primary group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-secondary group-hover:to-primary transition-all font-bold text-base break-all">
-                     rajeshgingle@gmail.com
-                    </p>
-                    <p className="text-primary/60 text-sm mt-1 flex items-center gap-1">
-                      <CheckCircle className="w-3 h-3" />
-                      Response in 24 hours
-                    </p>
-                  </div>
-                </div>
-              </a>
-
-              <div className="relative overflow-hidden bg-white p-6 rounded-2xl border-2 border-primary/20 shadow-lg">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
-                <div className="relative flex items-start gap-4">
-                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-black text-primary text-lg mb-1">Visit Us</h3>
-                    <p className="text-primary/80 font-semibold">
-                      Nagpur, Maharashtra<br />India 441106
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Trust Badges */}
-            <div className="bg-gradient-to-br from-primary to-secondary rounded-2xl p-6 text-white shadow-xl">
-              <h3 className="text-lg font-black mb-4 flex items-center gap-2">
-                <Award className="w-5 h-5" />
-                Why Choose Us?
-              </h3>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-bold text-sm">Quick Response Time</p>
-                    <p className="text-xs text-white/80">We respond within 24 hours</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-bold text-sm">Free Consultation</p>
-                    <p className="text-xs text-white/80">Expert advice at no cost</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-bold text-sm">Trusted by 500+ Clients</p>
-                    <p className="text-xs text-white/80">Join our satisfied customers</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side - Contact Form */}
-          <div className="relative">
-            <div className="bg-white border-2 border-primary/20 p-6 sm:p-8 rounded-3xl shadow-2xl">
+          {/* Form - Takes 3 columns on desktop, full width on mobile */}
+          <div className="lg:col-span-3 order-2 lg:order-1">
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
               {submitStatus === "success" ? (
-                <div className="py-12 text-center">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    <CheckCircle className="w-10 h-10 text-white" />
+                <div className="p-8 sm:p-12 text-center">
+                  <div className="relative inline-flex mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full blur-xl opacity-50" />
+                    <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-2xl">
+                      <CheckCircle className="w-12 h-12 text-white" />
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-3">
-                    Message Sent Successfully!
+                  <h3 className="text-3xl font-black text-gray-900 mb-3">
+                    Thank You!
                   </h3>
-                  <p className="text-primary/70 mb-6">We'll get back to you as soon as possible.</p>
+                  <p className="text-gray-600 mb-8 text-lg">We've received your message and will respond within 24 hours.</p>
                   <button
                     onClick={() => setSubmitStatus("idle")}
-                    className="px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold hover:scale-105 transition-all"
+                    className="px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold hover:scale-105 transition-all shadow-lg"
                   >
                     Send Another Message
                   </button>
                 </div>
               ) : (
                 <>
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-black text-primary mb-2">Send Us a Message</h3>
-                    <p className="text-sm text-primary/60">Fill out the form below and we'll get in touch shortly</p>
+                  {/* Form Header with Gradient */}
+                  <div className="bg-gradient-to-r from-primary to-secondary p-6 sm:p-8">
+                    <h3 className="text-2xl sm:text-3xl font-black text-white mb-2">Get In Touch</h3>
+                    <p className="text-white/90 text-sm sm:text-base">We'd love to hear from you. Fill out the form below.</p>
                   </div>
 
-                  <div className="space-y-5">
-                    {/* Name and Email Row */}
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="name" className="block text-primary font-bold mb-2 text-sm">
-                          Full Name <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={formState.name}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 bg-gray-50 border-2 border-primary/20 rounded-xl text-primary placeholder:text-primary/40 focus:border-primary focus:bg-white focus:outline-none transition-all"
-                          placeholder="John Doe"
-                        />
-                      </div>
+                  {/* Form Fields */}
+                  <div className="p-6 sm:p-8 space-y-6">
+                    {/* Name */}
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="flex items-center gap-2 text-gray-900 font-bold text-sm">
+                        <User className="w-4 h-4 text-primary" />
+                        Your Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formState.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-5 py-4 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                        placeholder="John Doe"
+                      />
+                    </div>
 
-                      <div>
-                        <label htmlFor="email" className="block text-primary font-bold mb-2 text-sm">
-                          Email Address <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formState.email}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 bg-gray-50 border-2 border-primary/20 rounded-xl text-primary placeholder:text-primary/40 focus:border-primary focus:bg-white focus:outline-none transition-all"
-                          placeholder="john@example.com"
-                        />
-                      </div>
+                    {/* Email */}
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="flex items-center gap-2 text-gray-900 font-bold text-sm">
+                        <Mail className="w-4 h-4 text-primary" />
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formState.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-5 py-4 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                        placeholder="john@example.com"
+                      />
                     </div>
 
                     {/* Subject */}
-                    <div>
-                      <label htmlFor="subject" className="block text-primary font-bold mb-2 text-sm">
+                    <div className="space-y-2">
+                      <label htmlFor="subject" className="flex items-center gap-2 text-gray-900 font-bold text-sm">
+                        <MessageSquare className="w-4 h-4 text-primary" />
                         Subject <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -282,15 +195,16 @@ export default function ContactSection() {
                         value={formState.subject}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-gray-50 border-2 border-primary/20 rounded-xl text-primary placeholder:text-primary/40 focus:border-primary focus:bg-white focus:outline-none transition-all"
-                        placeholder="How can we help you?"
+                        className="w-full px-5 py-4 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none"
+                        placeholder="How can we help?"
                       />
                     </div>
 
                     {/* Message */}
-                    <div>
-                      <label htmlFor="message" className="block text-primary font-bold mb-2 text-sm">
-                        Message <span className="text-red-500">*</span>
+                    <div className="space-y-2">
+                      <label htmlFor="message" className="flex items-center gap-2 text-gray-900 font-bold text-sm">
+                        <Sparkles className="w-4 h-4 text-primary" />
+                        Your Message <span className="text-red-500">*</span>
                       </label>
                       <textarea
                         id="message"
@@ -298,19 +212,19 @@ export default function ContactSection() {
                         value={formState.message}
                         onChange={handleChange}
                         required
-                        rows={5}
-                        className="w-full px-4 py-3 bg-gray-50 border-2 border-primary/20 rounded-xl text-primary placeholder:text-primary/40 focus:border-primary focus:bg-white focus:outline-none transition-all resize-none"
-                        placeholder="Tell us more about your inquiry..."
+                        rows={6}
+                        className="w-full px-5 py-4 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all resize-none outline-none"
+                        placeholder="Tell us about your requirements..."
                       />
                     </div>
 
                     {/* Error Message */}
                     {submitStatus === "error" && (
-                      <div className="p-4 bg-red-50 border-2 border-red-200 rounded-xl text-red-600 text-sm flex items-start gap-2">
-                        <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>Please fill in all required fields and try again.</span>
+                      <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                          <span className="text-red-600 font-bold text-xs">!</span>
+                        </div>
+                        <span>Please fill in all required fields correctly.</span>
                       </div>
                     )}
 
@@ -318,12 +232,12 @@ export default function ContactSection() {
                     <button
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className="w-full px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-all hover:shadow-xl hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+                      className="w-full px-6 py-5 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all hover:shadow-2xl hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-xl"
                     >
                       {isSubmitting ? (
                         <>
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Sending Message...
+                          <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
+                          <span>Sending...</span>
                         </>
                       ) : (
                         <>
@@ -335,6 +249,126 @@ export default function ContactSection() {
                   </div>
                 </>
               )}
+            </div>
+          </div>
+
+          {/* Contact Info Sidebar - Takes 2 columns on desktop */}
+          <div className="lg:col-span-2 order-1 lg:order-2 space-y-6">
+            
+            {/* Contact Info Stack */}
+            <div className="space-y-4">
+              {/* Phone */}
+              <a 
+                href="tel:+919822172379"
+                className="block group"
+                style={{ animation: 'slideInLeft 0.5s ease-out' }}
+              >
+                <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all hover:border-primary">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <Phone className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Call Us</div>
+                      <div className="text-gray-900 font-bold text-lg group-hover:text-primary transition-colors">
+                        +91 9822172379
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <Clock className="w-3 h-3" />
+                    Available Mon-Fri, 9am-6pm
+                  </div>
+                </div>
+              </a>
+
+              {/* Email */}
+              <a 
+                href="mailto:rajeshgingle@gmail.com"
+                className="block group"
+                style={{ animation: 'slideInLeft 0.5s ease-out', animationDelay: '0.1s' }}
+              >
+                <div className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all hover:border-secondary">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-secondary to-primary rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <Mail className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Email Us</div>
+                      <div className="text-gray-900 font-bold text-sm group-hover:text-secondary transition-colors truncate">
+                        rajeshgingle@gmail.com
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <CheckCircle className="w-3 h-3" />
+                    Response within 24 hours
+                  </div>
+                </div>
+              </a>
+
+              {/* Location */}
+              <div 
+                className="bg-white border border-gray-200 rounded-2xl p-6"
+                style={{ animation: 'slideInLeft 0.5s ease-out', animationDelay: '0.2s' }}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Location</div>
+                    <div className="text-gray-900 font-bold text-sm leading-snug">
+                      Nagpur, Maharashtra<br />India 441106
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Card */}
+            <div 
+              className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 sm:p-8 shadow-2xl overflow-hidden"
+              style={{ animation: 'slideInLeft 0.5s ease-out', animationDelay: '0.3s' }}
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full" />
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full" />
+              
+              <div className="relative">
+                <Award className="w-10 h-10 text-white mb-4" />
+                <h3 className="text-xl font-black text-white mb-4">
+                  Why Choose Us?
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-white text-sm">24/7 Support</p>
+                      <p className="text-xs text-white/70">Always here when you need us</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-white text-sm">Expert Team</p>
+                      <p className="text-xs text-white/70">Professional guidance guaranteed</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-white text-sm">500+ Happy Clients</p>
+                      <p className="text-xs text-white/70">Join our satisfied customers</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

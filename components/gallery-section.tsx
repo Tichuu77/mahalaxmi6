@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
-import { X, ChevronLeft, ChevronRight, ZoomIn, Grid3x3 } from "lucide-react"
+import { useEffect, useState } from "react"
+import { X, ChevronLeft, ChevronRight, ZoomIn, Grid3x3, Camera } from "lucide-react"
 
 const galleryItems = [
   { id: 1, src: "/gallery1.jpg", alt: "Morning View", category: "exterior" },
@@ -18,7 +18,7 @@ const galleryItems = [
   { id: 12, src: "/gallery12.jpg", alt: "Top View", category: "exterior" },
 ]
 
-export  function GallerySection() {
+export   function GallerySection() {
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const [activeCategory, setActiveCategory] = useState<string>("all")
   const [hoveredId, setHoveredId] = useState<number | null>(null)
@@ -62,122 +62,145 @@ export  function GallerySection() {
   }
 
   return (
-    <section id="gallery" className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
-      {/* Decorative background */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-      </div>
+    <section id="gallery" className="py-12 sm:py-16 lg:py-24 bg-white relative overflow-hidden">
+      
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header with side decoration */}
-        <div className="mb-12 lg:mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
-                  <Grid3x3 className="w-6 h-6 text-white" />
-                </div>
-                <div className="h-px flex-1 max-w-xs bg-gradient-to-r from-primary to-transparent"></div>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-primary mb-3">
-                Visual Gallery
-              </h2>
-              <p className="text-sm sm:text-base text-primary/70 max-w-xl">
-                Explore our stunning collection of projects and developments
-              </p>
-            </div>
-            
-            {/* Stats */}
-            <div className="hidden lg:flex gap-4">
-              <div className="text-center px-6 py-4 bg-white rounded-2xl shadow-lg border-l-4 border-primary">
-                <div className="text-3xl font-black text-primary">{galleryItems.length}</div>
-                <div className="text-xs text-gray-600 font-bold mt-1">Photos</div>
-              </div>
-              <div className="text-center px-6 py-4 bg-white rounded-2xl shadow-lg border-l-4 border-secondary">
-                <div className="text-3xl font-black text-secondary">{categories.length - 1}</div>
-                <div className="text-xs text-gray-600 font-bold mt-1">Categories</div>
-              </div>
-            </div>
+        {/* Centered Compact Header */}
+        <div className="text-center mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full border border-primary/20 mb-4">
+            <Camera className="w-4 h-4 text-primary" />
+            <span className="text-sm text-primary font-bold uppercase tracking-wider">
+              Gallery
+            </span>
           </div>
-
-          {/* Category filter pills */}
-          <div className="flex flex-wrap gap-2 sm:gap-3">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm capitalize transition-all duration-300 ${
-                  activeCategory === cat
-                    ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg scale-105"
-                    : "bg-white text-primary border-2 border-gray-200 hover:border-primary/40 hover:shadow-md"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-3 leading-tight">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+              Visual
+            </span>{" "}
+            Gallery
+          </h2>
+          
+          <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+            Explore our stunning collection of projects and developments
+          </p>
         </div>
 
-        {/* Mobile Slider */}
-        <div className="sm:hidden -mx-4">
-          <div className="relative px-4">
-            <div className="overflow-hidden">
-              <div className="flex gap-0 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-                {filteredItems.map((item) => (
-                  <div
-                    key={item.id}
-                    onClick={() => setSelectedId(item.id)}
-                    className="flex-shrink-0 w-full snap-center px-2"
+        {/* Category Tabs + Stats Combined */}
+        <div className="mb-8 sm:mb-10">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            {/* Category filter - scrollable on mobile */}
+            <div className="-mx-4 px-4 sm:mx-0 sm:px-0 w-full sm:w-auto overflow-x-auto">
+              <div className="flex gap-2 pb-2 sm:pb-0 snap-x snap-mandatory scrollbar-hide">
+                {categories.map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`snap-start flex-shrink-0 px-4 py-2 rounded-xl font-bold text-sm capitalize transition-all ${
+                      activeCategory === cat
+                        ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
                   >
-                    <div className="relative h-[450px] rounded-2xl overflow-hidden shadow-2xl">
-                      {/* Image */}
-                      <img
-                        src={item.src}
-                        alt={item.alt}
-                        className="w-full h-full object-cover"
-                      />
-
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
-
-                      {/* Content overlay */}
-                      <div className="absolute inset-0 p-6 flex flex-col justify-between">
-                        {/* Category badge - top right */}
-                        <div className="flex justify-end">
-                          <span className="px-4 py-2 bg-white/20 backdrop-blur-md text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-lg">
-                            {item.category}
-                          </span>
-                        </div>
-
-                        {/* Title - bottom */}
-                        <div>
-                          <h3 className="text-white font-black text-2xl mb-3 drop-shadow-lg">
-                            {item.alt}
-                          </h3>
-                          <div className="flex items-center gap-2 text-white/90 text-sm">
-                            <ZoomIn className="w-5 h-5" />
-                            <span className="font-bold">Tap to expand</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Corner accent */}
-                      <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-white/20 to-transparent"></div>
-                    </div>
-                  </div>
+                    {cat}
+                  </button>
                 ))}
               </div>
             </div>
 
+            {/* Stats - Side by side */}
+            <div className="flex gap-3">
+              <div className="px-4 py-2 bg-white rounded-xl shadow-md border border-gray-200 text-center">
+                <span className="text-xl font-black text-primary">{galleryItems.length}</span>
+                <span className="text-xs text-gray-600 font-semibold ml-1">Photos</span>
+              </div>
+              <div className="px-4 py-2 bg-white rounded-xl shadow-md border border-gray-200 text-center">
+                <span className="text-xl font-black text-secondary">{categories.length - 1}</span>
+                <span className="text-xs text-gray-600 font-semibold ml-1">Categories</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Slider */}
+        <div className="md:hidden -mx-4 mb-10">
+          <div className="px-4">
+            <div 
+              id="gallery-slider"
+              className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+              onScroll={(e) => {
+                const slider = e.currentTarget
+                const scrollLeft = slider.scrollLeft
+                const cardWidth = slider.scrollWidth / filteredItems.length
+                const activeIndex = Math.round(scrollLeft / cardWidth)
+                
+                // Update dots
+                const dots = document.querySelectorAll('.gallery-dot')
+                dots.forEach((dot, idx) => {
+                  if (idx === activeIndex) {
+                    dot.classList.add('w-6', 'bg-gradient-to-r', 'from-primary', 'to-secondary')
+                    dot.classList.remove('w-1.5', 'bg-gray-300')
+                  } else {
+                    dot.classList.remove('w-6', 'bg-gradient-to-r', 'from-primary', 'to-secondary')
+                    dot.classList.add('w-1.5', 'bg-gray-300')
+                  }
+                })
+              }}
+            >
+              {filteredItems.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => setSelectedId(item.id)}
+                  className="flex-shrink-0 w-[85vw] snap-center"
+                >
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl h-[400px]">
+                    {/* Image */}
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="w-full h-full object-cover"
+                    />
+
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+                    {/* Content */}
+                    <div className="absolute inset-0 p-5 flex flex-col justify-between">
+                      {/* Category badge - top */}
+                      <div>
+                        <span className="inline-block px-3 py-1.5 bg-white/20 backdrop-blur-md text-white text-xs font-bold rounded-full uppercase">
+                          {item.category}
+                        </span>
+                      </div>
+
+                      {/* Title - bottom */}
+                      <div>
+                        <h3 className="text-white font-black text-xl mb-2">
+                          {item.alt}
+                        </h3>
+                        <div className="flex items-center gap-2 text-white/90 text-sm">
+                          <ZoomIn className="w-4 h-4" />
+                          <span className="font-semibold">Tap to expand</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
             {/* Scroll indicator dots */}
-            <div className="flex justify-center gap-2 mt-6">
+            <div className="flex justify-center gap-2 mt-4">
               {filteredItems.map((item, index) => (
                 <div
                   key={item.id}
-                  className={`h-2 rounded-full transition-all ${
-                    index === 0 ? 'w-8 bg-gradient-to-r from-primary to-secondary' : 'w-2 bg-gray-300'
+                  className={`gallery-dot h-1.5 rounded-full transition-all ${
+                    index === 0 ? 'w-6 bg-gradient-to-r from-primary to-secondary' : 'w-1.5 bg-gray-300'
                   }`}
                 />
               ))}
@@ -185,72 +208,49 @@ export  function GallerySection() {
           </div>
         </div>
 
-        {/* Desktop Bento Grid Layout */}
-        <div className="hidden sm:grid sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
-          {filteredItems.map((item, index) => {
-            // Create varied sizes: first item large, every 5th item wide
-            const isLarge = index === 0
-            const isWide = index % 5 === 0 && index !== 0
-            
-            return (
-              <div
-                key={item.id}
-                onMouseEnter={() => setHoveredId(item.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                onClick={() => setSelectedId(item.id)}
-                className={`group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
-                  isLarge ? 'col-span-2 row-span-2' : isWide ? 'col-span-2' : ''
-                }`}
-                style={{
-                  height: isLarge ? '400px' : isWide ? '200px' : '190px'
-                }}
-              >
-                {/* Image */}
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+        {/* Desktop/Tablet Grid */}
+        <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
+          {filteredItems.map((item) => (
+            <div
+              key={item.id}
+              onMouseEnter={() => setHoveredId(item.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              onClick={() => setSelectedId(item.id)}
+              className="group relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 hover:shadow-2xl aspect-square"
+            >
+              {/* Image */}
+              <img
+                src={item.src}
+                alt={item.alt}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
 
-                {/* Gradient overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-t transition-opacity duration-500 ${
-                  hoveredId === item.id 
-                    ? 'from-primary/90 via-primary/60 to-transparent opacity-100' 
-                    : 'from-black/70 via-black/30 to-transparent opacity-90'
-                }`}></div>
+              {/* Overlay */}
+              <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity ${
+                hoveredId === item.id ? 'opacity-100' : 'opacity-60'
+              }`}></div>
 
-                {/* Content overlay */}
-                <div className="absolute inset-0 p-4 flex flex-col justify-between">
-                  {/* Category badge - top right */}
-                  <div className="flex justify-end">
-                    <span className="px-3 py-1 bg-white/20 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold rounded-full uppercase tracking-wider">
-                      {item.category}
-                    </span>
-                  </div>
-
-                  {/* Title - bottom */}
-                  <div>
-                    <h3 className={`text-white font-black drop-shadow-lg ${
-                      isLarge ? 'text-xl sm:text-2xl' : 'text-sm sm:text-base'
-                    }`}>
-                      {item.alt}
-                    </h3>
-                    
-                    {/* Zoom icon on hover */}
-                    <div className={`mt-2 flex items-center gap-2 text-white text-xs transition-all duration-300 ${
-                      hoveredId === item.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-                    }`}>
-                      <ZoomIn className="w-4 h-4" />
-                      <span className="font-semibold">Click to expand</span>
-                    </div>
-                  </div>
+              {/* Content - Bottom */}
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                <div className="mb-2">
+                  <span className="inline-block px-2 py-1 bg-white/20 backdrop-blur-sm text-white text-xs font-bold rounded uppercase">
+                    {item.category}
+                  </span>
                 </div>
-
-                {/* Corner accent */}
-                <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <h3 className="text-white font-bold text-sm sm:text-base line-clamp-1">
+                  {item.alt}
+                </h3>
+                
+                {/* Zoom indicator */}
+                <div className={`mt-2 flex items-center gap-1 text-white text-xs transition-all ${
+                  hoveredId === item.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                }`}>
+                  <ZoomIn className="w-3 h-3" />
+                  <span>View</span>
+                </div>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
 
         <style jsx>{`
@@ -261,22 +261,28 @@ export  function GallerySection() {
           .scrollbar-hide::-webkit-scrollbar {
             display: none;
           }
+          .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
         `}</style>
 
-        {/* View All CTA */}
-        <div className="mt-12 lg:mt-16 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-gray-200">
-            <div className="text-center sm:text-left">
-              <h3 className="text-xl sm:text-2xl font-black text-primary mb-2">
+        {/* Bottom CTA - Full Width */}
+        <div className="bg-gradient-to-r from-primary to-secondary rounded-2xl p-6 sm:p-8 shadow-2xl">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-center sm:text-left text-white">
+              <h3 className="text-xl sm:text-2xl font-black mb-2">
                 Love What You See?
               </h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-white/90">
                 Visit our projects to experience the quality firsthand
               </p>
             </div>
             <a
               href="#contact"
-              className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold text-sm sm:text-base hover:shadow-2xl hover:scale-105 transition-all whitespace-nowrap"
+              className="px-6 py-3 bg-white text-primary rounded-xl font-bold text-sm hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap"
             >
               Schedule a Visit
             </a>

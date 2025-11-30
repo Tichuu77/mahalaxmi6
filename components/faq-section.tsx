@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, HelpCircle, MessageCircle, Sparkles, Phone, Mail } from "lucide-react"
+import { ChevronDown, HelpCircle, MessageCircle, Sparkles, Phone, Mail, Search, ArrowRight, CheckCircle } from "lucide-react"
 
 const faqs = [
   {
@@ -42,265 +42,266 @@ const faqs = [
   },
 ]
 
-export function FAQSection() {
+export   function FAQSection() {
   const [openId, setOpenId] = useState(1)
-  const [filter, setFilter] = useState("all")
+  const [searchTerm, setSearchTerm] = useState("")
 
-  const filteredFaqs = filter === "all" 
-    ? faqs 
-    : faqs.filter(faq => faq.category.toLowerCase() === filter)
+  const filteredFaqs = faqs.filter(faq => 
+    faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
-    <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-white via-primary/5 to-secondary/5 relative overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-32 bg-white relative overflow-hidden">
       
       <style>{`
-        @keyframes fadeInUp {
+        @keyframes expandDown {
           from {
             opacity: 0;
-            transform: translateY(20px);
+            transform: scaleY(0);
+            transform-origin: top;
           }
           to {
             opacity: 1;
-            transform: translateY(0);
+            transform: scaleY(1);
           }
         }
-        @keyframes slideDown {
-          from {
-            opacity: 0;
-            max-height: 0;
-          }
-          to {
-            opacity: 1;
-            max-height: 500px;
-          }
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
         }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
+        .animate-bounce-slow {
+          animation: bounce-slow 3s ease-in-out infinite;
         }
       `}</style>
 
-      {/* Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" style={{ animationDelay: '3s' }} />
-        <HelpCircle className="absolute top-10 right-20 w-20 h-20 text-primary/5 animate-float" />
-      </div>
+      {/* Minimal Background Pattern */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent" />
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Enhanced Header */}
-        <div className="text-center mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-primary/10 rounded-full border border-primary/30">
-            <HelpCircle className="w-4 h-4 text-secondary animate-pulse" />
-            <span
-              style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
-              className="text-primary font-semibold text-xs sm:text-sm uppercase tracking-wider"
-            >
-              FAQ
-            </span>
-          </div>
-          
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-primary mb-4 leading-tight">
-            Got Questions?
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">
-              We've Got Answers
-            </span>
-          </h2>
-          
-          <p className="text-sm sm:text-base text-primary/70 max-w-2xl mx-auto leading-relaxed">
-            Find answers to common questions about our properties and services
-          </p>
-        </div>
-
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
-          
-          {/* Left: Filter Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="lg:sticky lg:top-8 space-y-4">
-              <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-lg border-2 border-primary/20">
-                <h3 className="text-lg font-black text-primary mb-4 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-secondary" />
-                  Categories
-                </h3>
-                <div className="space-y-2">
-                  {["all", "properties", "pricing", "legal", "finance", "visits", "amenities"].map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setFilter(category)}
-                      className={`w-full text-left px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                        filter === category
-                          ? "bg-gradient-to-r from-primary to-secondary text-white shadow-md scale-[1.02]"
-                          : "bg-primary/5 text-primary hover:bg-primary/10 border border-primary/20 hover:border-primary/40"
-                      }`}
-                    >
-                      {category.charAt(0).toUpperCase() + category.slice(1)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Contact Card */}
-              <div className="bg-gradient-to-br from-primary to-secondary rounded-2xl p-5 sm:p-6 shadow-xl text-white">
-                <h3 className="text-lg font-black mb-2">Need More Help?</h3>
-                <p className="text-sm text-white/90 mb-4">
-                  Our team is ready to assist you
-                </p>
-                <div className="space-y-2">
-                  <a
-                    href="tel:+919822172379"
-                    className="flex items-center gap-2 text-sm font-semibold hover:text-white/80 transition-colors"
-                  >
-                    <Phone className="w-4 h-4" />
-                    +91 9822172379
-                  </a>
-                  <a
-                    href="mailto:rajeshgingle@gmail.com"
-                    className="flex items-center gap-2 text-sm font-semibold hover:text-white/80 transition-colors"
-                  >
-                    <Mail className="w-4 h-4" />
-                    Get in Touch
-                  </a>
+        {/* Header - Different Style */}
+        <div className="mb-12 sm:mb-16">
+          <div className="flex items-start gap-6 mb-8">
+            <div className="flex-shrink-0">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary blur-xl opacity-50" />
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center shadow-2xl animate-bounce-slow">
+                  <HelpCircle className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
                 </div>
               </div>
             </div>
+            <div className="flex-1">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black text-gray-900 mb-3 leading-tight">
+                Frequently Asked
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                  Questions
+                </span>
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+                Everything you need to know about our properties and services
+              </p>
+            </div>
           </div>
 
-          {/* Right: FAQ Accordion */}
-          <div className="lg:col-span-2 space-y-4">
-            {filteredFaqs.length > 0 ? (
-              filteredFaqs.map((faq, index) => {
-                const isOpen = openId === faq.id
-                
-                return (
-                  <div
-                    key={faq.id}
-                    className={`group bg-white border-2 rounded-2xl overflow-hidden transition-all duration-300 shadow-md ${
-                      isOpen 
-                        ? "border-primary shadow-xl shadow-primary/20 scale-[1.01]" 
-                        : "border-primary/10 hover:border-primary/30 hover:shadow-lg"
-                    }`}
-                    style={{ 
-                      animation: 'fadeInUp 0.5s ease-out forwards',
-                      animationDelay: `${index * 50}ms`,
-                      opacity: 0
-                    }}
-                  >
-                    <button
-                      onClick={() => setOpenId(isOpen ? null : faq.id)}
-                      className="w-full px-5 sm:px-6 py-5 sm:py-6 flex items-start gap-3 sm:gap-4 hover:bg-primary/5 transition-colors text-left"
-                    >
-                      {/* Question Number Badge */}
-                      <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center font-black text-base transition-all duration-300 shadow-md ${
+          {/* Search Bar */}
+          <div className="relative max-w-2xl">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-2xl blur-lg opacity-20" />
+            <div className="relative flex items-center gap-3 bg-white border-2 border-gray-200 rounded-2xl px-5 py-4 shadow-xl focus-within:border-primary transition-colors">
+              <Search className="w-6 h-6 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search your question..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="flex-1 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none text-base"
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm("")}
+                  className="text-sm font-bold text-primary hover:text-secondary transition-colors"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* FAQ Grid - Two Column Layout */}
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-12 sm:mb-16">
+          {filteredFaqs.length > 0 ? (
+            filteredFaqs.map((faq, index) => {
+              const isOpen = openId === faq.id
+              
+              return (
+                <div
+                  key={faq.id}
+                  onClick={() => setOpenId(isOpen ? null : faq.id)}
+                  className={`cursor-pointer group relative bg-gradient-to-br transition-all duration-300 rounded-2xl overflow-hidden ${
+                    isOpen 
+                      ? "from-primary via-secondary to-primary shadow-2xl scale-[1.02] sm:col-span-2" 
+                      : "from-gray-50 to-white border-2 border-gray-200 hover:border-primary/50 hover:shadow-lg"
+                  }`}
+                >
+                  {/* Header Area */}
+                  <div className={`p-5 sm:p-6 ${isOpen ? 'pb-4' : ''}`}>
+                    <div className="flex items-start gap-4">
+                      {/* Icon Circle */}
+                      <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
                         isOpen 
-                          ? "bg-gradient-to-br from-primary to-secondary text-white scale-110 rotate-3" 
-                          : "bg-primary/10 text-primary group-hover:bg-primary/20"
+                          ? "bg-white/20 backdrop-blur-sm" 
+                          : "bg-gradient-to-br from-primary/10 to-secondary/10 group-hover:from-primary/20 group-hover:to-secondary/20"
                       }`}>
-                        {faq.id}
+                        {isOpen ? (
+                          <CheckCircle className="w-6 h-6 text-white" />
+                        ) : (
+                          <HelpCircle className="w-6 h-6 text-primary" />
+                        )}
                       </div>
 
-                      {/* Question Content */}
+                      {/* Question */}
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-2 mb-2">
-                          <span
-                            style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
-                            className={`font-bold text-sm sm:text-base lg:text-lg leading-snug transition-all ${
-                              isOpen 
-                                ? "text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary" 
-                                : "text-primary"
-                            }`}
-                          >
-                            {faq.question}
-                          </span>
-                          
-                          {/* Chevron Icon */}
-                          <ChevronDown
-                            className={`w-5 h-5 sm:w-6 sm:h-6 text-primary transition-transform duration-300 flex-shrink-0 ${
-                              isOpen ? "rotate-180" : ""
-                            }`}
-                          />
-                        </div>
+                        <h3
+                          style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
+                          className={`font-bold text-base sm:text-lg leading-snug mb-2 transition-colors ${
+                            isOpen ? "text-white" : "text-gray-900 group-hover:text-primary"
+                          }`}
+                        >
+                          {faq.question}
+                        </h3>
                         
-                        {/* Category Badge */}
-                        <span className="inline-block px-3 py-1 text-xs bg-primary/10 text-primary/70 rounded-full font-semibold border border-primary/20">
+                        {/* Category Tag */}
+                        <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full ${
+                          isOpen 
+                            ? "bg-white/20 text-white backdrop-blur-sm" 
+                            : "bg-primary/10 text-primary"
+                        }`}>
                           {faq.category}
                         </span>
                       </div>
-                    </button>
 
-                    {/* Answer Section */}
-                    {isOpen && (
-                      <div 
-                        className="px-5 sm:px-6 pb-5 sm:pb-6 border-t-2 border-primary/10"
-                        style={{ animation: 'slideDown 0.3s ease-out forwards' }}
-                      >
-                        <div className="pt-5 sm:pt-6">
-                          <div className="flex gap-3 sm:gap-4 p-4 sm:p-5 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl border border-primary/20">
-                            {/* Answer Icon */}
-                            <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-md">
-                              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                            </div>
-                            {/* Answer Text */}
-                            <p className="text-primary/80 leading-relaxed text-sm sm:text-base flex-1">
-                              {faq.answer}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                      {/* Arrow Icon */}
+                      <ChevronDown
+                        className={`w-6 h-6 flex-shrink-0 transition-all duration-300 ${
+                          isOpen ? "rotate-180 text-white" : "text-gray-400 group-hover:text-primary"
+                        }`}
+                      />
+                    </div>
                   </div>
-                )
-              })
-            ) : (
-              <div className="text-center py-12 bg-white rounded-2xl border-2 border-primary/20">
-                <HelpCircle className="w-16 h-16 text-primary/30 mx-auto mb-4" />
-                <p className="text-primary/70 font-semibold">No questions found in this category</p>
-              </div>
-            )}
-          </div>
+
+                  {/* Answer Area - Only shown when open */}
+                  {isOpen && (
+                    <div 
+                      className="px-5 sm:px-6 pb-5 sm:pb-6"
+                      style={{ animation: 'expandDown 0.3s ease-out' }}
+                    >
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-white/20">
+                        <p className="text-white/95 leading-relaxed text-sm sm:text-base">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })
+          ) : (
+            <div className="sm:col-span-2 text-center py-16 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-300">
+              <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-600 font-semibold text-lg mb-2">No results found</p>
+              <p className="text-gray-500 text-sm">Try a different search term</p>
+            </div>
+          )}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-12 sm:mt-16 bg-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl border-2 border-primary/20 text-center">
-          <div className="max-w-3xl mx-auto">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-lg mb-4">
-              <MessageCircle className="w-8 h-8 text-white" />
+        {/* Bottom Section - Horizontal Cards */}
+        <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+          
+          {/* Contact Card */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity" />
+            <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full" />
+              
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                  <Phone className="w-7 h-7 text-white" />
+                </div>
+                
+                <h3 className="text-xl sm:text-2xl font-black text-white mb-2">
+                  Still Need Help?
+                </h3>
+                <p className="text-white/80 text-sm mb-5">
+                  Our team is available 24/7 to answer your questions
+                </p>
+                
+                <div className="space-y-3">
+                  <a
+                    href="tel:+919822172379"
+                    className="flex items-center gap-3 text-white hover:text-white/80 transition-colors group/link"
+                  >
+                    <div className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center group-hover/link:bg-white/20 transition-colors">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-white/60">Call Us</div>
+                      <div className="text-sm font-bold">+91 9822172379</div>
+                    </div>
+                  </a>
+                  
+                  <a
+                    href="mailto:rajeshgingle@gmail.com"
+                    className="flex items-center gap-3 text-white hover:text-white/80 transition-colors group/link"
+                  >
+                    <div className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center group-hover/link:bg-white/20 transition-colors">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-white/60">Email Us</div>
+                      <div className="text-sm font-bold">Get in Touch</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </div>
-            
-            <h3 className="text-2xl sm:text-3xl font-black text-primary mb-3">
-              Still Have Questions?
-            </h3>
-            <p className="text-primary/70 text-sm sm:text-base mb-6 sm:mb-8">
-              Our team is here to help you. Get in touch with us for personalized assistance.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <button 
-                onClick={() => {
-                  const element = document.getElementById("contact")
-                  if (element) element.scrollIntoView({ behavior: "smooth" })
-                }}
-                className="px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold text-sm sm:text-base transition-all hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                Contact Us Now
-              </button>
-              <a
-                href="tel:+919822172379"
-                className="px-8 py-4 bg-white border-2 border-primary text-primary rounded-xl font-bold text-sm sm:text-base transition-all hover:scale-105 hover:bg-primary/5"
-              >
-                Call +91 9822172379
-              </a>
+          </div>
+
+          {/* CTA Card */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-secondary to-primary rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity" />
+            <div className="relative bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-gray-100 overflow-hidden">
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-primary/5 to-transparent rounded-tr-full" />
+              
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                  <MessageCircle className="w-7 h-7 text-white" />
+                </div>
+                
+                <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-2">
+                  Ready to Start?
+                </h3>
+                <p className="text-gray-600 text-sm mb-5">
+                  Let's discuss your property investment journey today
+                </p>
+                
+                <button 
+                  onClick={() => {
+                    const element = document.getElementById("contact")
+                    if (element) element.scrollIntoView({ behavior: "smooth" })
+                  }}
+                  className="w-full px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold text-base hover:shadow-xl transition-all hover:scale-105 flex items-center justify-center gap-2"
+                >
+                  Contact Us Now
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+                
+                <div className="mt-4 flex items-center gap-2 text-xs text-gray-500">
+                  <CheckCircle className="w-4 h-4 text-primary" />
+                  <span>Response within 24 hours guaranteed</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

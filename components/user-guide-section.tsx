@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDown, Home, Calendar, Briefcase, CheckCircle, ArrowRight, Sparkles } from "lucide-react"
+import { ChevronDown, Home, Calendar, Briefcase, CheckCircle, ArrowRight, Sparkles, Play, Clock, Target } from "lucide-react"
 import { useState } from "react"
 
 const guides = [
@@ -54,212 +54,231 @@ const guides = [
   },
 ]
 
-export  function UserGuideSection() {
-  const [expandedIndex, setExpandedIndex] = useState(0)
+export   function UserGuideSection() {
+  const [activeStep, setActiveStep] = useState(0)
 
   return (
-    <section id="user-guide" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden">
+    <section id="user-guide" className="py-16 sm:py-20 lg:py-28 bg-white relative overflow-hidden">
       
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
         }
-        @keyframes slideIn {
+        @keyframes slideUp {
           from {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
           }
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
+        .animate-pulse-slow {
+          animation: pulse-slow 3s ease-in-out infinite;
         }
       `}</style>
 
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-3xl" style={{ animationDelay: '3s' }} />
+      {/* Background Pattern */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
+        <div className="absolute top-20 left-10 w-2 h-2 bg-primary rounded-full animate-pulse-slow" />
+        <div className="absolute top-40 right-20 w-3 h-3 bg-secondary rounded-full animate-pulse-slow" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-primary rounded-full animate-pulse-slow" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-20 right-1/3 w-3 h-3 bg-secondary rounded-full animate-pulse-slow" style={{ animationDelay: '1.5s' }} />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
-          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-xl">
-              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+        {/* Header - Centered with Icon */}
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="inline-flex items-center justify-center mb-6">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary blur-xl opacity-50" />
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-2xl">
+                <Target className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+              </div>
             </div>
-            <div className="h-0.5 sm:h-1 w-16 sm:w-24 bg-gradient-to-r from-primary to-transparent rounded-full" />
           </div>
           
-          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-primary mb-3 sm:mb-4 leading-tight px-4">
-            Your Journey
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">
-              Starts Here
+          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black text-gray-900 mb-4 leading-tight">
+            Simple. Clear.
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mt-2">
+              Effective.
             </span>
           </h2>
           
-          <p className="text-sm sm:text-base text-primary/70 leading-relaxed max-w-2xl mx-auto px-4">
-            Follow our streamlined 4-step process to find and secure your dream property
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            Four powerful steps to transform your property dreams into reality
           </p>
-          
-          <div className="flex items-center justify-center gap-3 mt-4 sm:mt-6">
-            <div className="px-4 py-2 sm:px-5 sm:py-2.5 bg-primary/10 rounded-lg sm:rounded-xl border border-primary/30">
-              <div className="text-xl sm:text-2xl font-black text-primary">04</div>
-              <div className="text-[10px] sm:text-xs text-primary/60 font-semibold">Steps</div>
-            </div>
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-secondary" />
-            <div className="px-4 py-2 sm:px-5 sm:py-2.5 bg-secondary/10 rounded-lg sm:rounded-xl border border-secondary/30">
-              <div className="text-xl sm:text-2xl font-black text-secondary">100%</div>
-              <div className="text-[10px] sm:text-xs text-secondary/60 font-semibold">Support</div>
-            </div>
-          </div>
         </div>
 
-        {/* Steps - Single Column on Mobile, Row on Desktop */}
-        <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-4 sm:gap-4 mb-12 sm:mb-16">
-          {guides.map((guide, index) => {
-            const Icon = guide.icon
-            const isExpanded = expandedIndex === index
-            
-            return (
-              <div key={index} className="relative">
-                {/* Card */}
-                <div
-                  onClick={() => setExpandedIndex(index)}
-                  className={`cursor-pointer group relative bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-lg hover:shadow-xl transition-all duration-300 border-2 ${
-                    isExpanded 
-                      ? "border-primary shadow-primary/20 scale-[1.02]" 
-                      : "border-primary/20 hover:border-primary/40"
-                  }`}
-                >
-                  {/* Glowing effect */}
-                  <div className={`absolute -top-1 -right-1 w-16 h-16 bg-gradient-to-bl from-primary/20 to-transparent rounded-full blur-xl transition-opacity ${isExpanded ? 'opacity-100' : 'opacity-0'}`} />
-                  
-                  {/* Step Number Badge */}
-                  <div className="absolute -top-3 left-4 w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary to-secondary shadow-lg flex items-center justify-center">
-                    <span className="text-white font-black text-sm sm:text-base">{guide.number}</span>
-                  </div>
-
-                  {/* Icon */}
-                  <div className={`mt-3 mb-3 w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center transition-transform duration-300 ${isExpanded ? 'rotate-6 scale-110' : 'rotate-0'}`}>
-                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-base sm:text-lg font-black text-primary mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-all leading-tight">
-                    {guide.title}
-                  </h3>
-
-                  {/* Description - Hidden on mobile */}
-                  <p className="hidden sm:block text-xs text-primary/60 leading-relaxed mb-3 min-h-[48px]">
-                    {guide.description}
-                  </p>
-
-                  {/* Expand Indicator */}
-                  <div className="flex items-center justify-between mt-3">
-                    <div className={`h-0.5 sm:h-1 bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-300 ${isExpanded ? 'w-full' : 'w-6 sm:w-8'}`} />
-                    <ChevronDown
-                      className={`w-4 h-4 sm:w-5 sm:h-5 text-primary transition-transform duration-300 ${
-                        isExpanded ? "rotate-180" : ""
-                      }`}
-                    />
-                  </div>
-                </div>
-
-                {/* Expandable Details */}
-                {isExpanded && (
-                  <div 
-                    className="mt-3 sm:mt-4 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl sm:rounded-2xl p-4 sm:p-5 border border-primary/20"
-                    style={{ animation: 'slideIn 0.3s ease-out' }}
-                  >
-                    {/* Description on mobile only */}
-                    <p className="sm:hidden text-xs text-primary/70 leading-relaxed mb-4">
-                      {guide.description}
-                    </p>
-                    
-                    <h4 className="text-xs sm:text-sm font-black text-primary mb-3 flex items-center gap-2">
-                      <div className="w-0.5 h-3 bg-gradient-to-b from-primary to-secondary rounded-full" />
-                      STEPS TO FOLLOW
-                    </h4>
-                    <ul className="space-y-2 sm:space-y-2.5">
-                      {guide.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="flex items-start gap-2">
-                          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-sm">
-                            <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                          </div>
-                          <span className="text-xs sm:text-sm text-primary/80 leading-relaxed">
-                            {detail}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+        {/* Main Content - Horizontal Timeline Layout */}
+        <div className="mb-16 sm:mb-20">
+          {/* Timeline Connector - Hidden on mobile */}
+          <div className="hidden lg:flex items-center justify-center mb-12 px-20">
+            {guides.map((_, index) => (
+              <div key={index} className="flex items-center flex-1">
+                <div className={`w-4 h-4 rounded-full ${activeStep >= index ? 'bg-gradient-to-r from-primary to-secondary' : 'bg-gray-300'} transition-all duration-500`} />
+                {index < guides.length - 1 && (
+                  <div className={`h-1 flex-1 ${activeStep > index ? 'bg-gradient-to-r from-primary to-secondary' : 'bg-gray-300'} transition-all duration-500`} />
                 )}
               </div>
-            )
-          })}
+            ))}
+          </div>
+
+          {/* Step Cards - Horizontal on desktop, vertical on mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
+            {guides.map((guide, index) => {
+              const Icon = guide.icon
+              const isActive = activeStep === index
+              
+              return (
+                <div key={index} className="relative">
+                  <div
+                    onClick={() => setActiveStep(index)}
+                    className={`cursor-pointer relative bg-gradient-to-br ${
+                      isActive 
+                        ? 'from-primary/10 via-secondary/5 to-white border-primary' 
+                        : 'from-white to-gray-50 border-gray-200'
+                    } rounded-3xl p-6 sm:p-8 border-2 transition-all duration-500 hover:shadow-2xl group`}
+                  >
+                    {/* Number Badge - Top Right */}
+                    <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center shadow-xl transform group-hover:rotate-12 transition-transform duration-300">
+                      <span className="text-white font-black text-lg">{guide.number}</span>
+                    </div>
+
+                    {/* Icon Container */}
+                    <div className={`mb-6 relative ${isActive ? 'scale-110' : 'scale-100'} transition-transform duration-500`}>
+                      <div className={`w-20 h-20 rounded-2xl ${
+                        isActive 
+                          ? 'bg-gradient-to-br from-primary to-secondary' 
+                          : 'bg-gray-100'
+                      } flex items-center justify-center shadow-lg transition-all duration-500`}>
+                        <Icon className={`w-10 h-10 ${isActive ? 'text-white' : 'text-gray-500'} transition-colors duration-500`} />
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className={`text-xl sm:text-2xl font-black mb-3 transition-colors duration-500 ${
+                      isActive ? 'text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary' : 'text-gray-900'
+                    }`}>
+                      {guide.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-sm text-gray-600 leading-relaxed mb-4 min-h-[60px]">
+                      {guide.description}
+                    </p>
+
+                    {/* Action Button */}
+                    <button className={`flex items-center gap-2 text-sm font-bold ${
+                      isActive ? 'text-primary' : 'text-gray-400'
+                    } transition-colors duration-500 group-hover:gap-3`}>
+                      Learn More
+                      <ArrowRight className="w-4 h-4 transition-all duration-300" />
+                    </button>
+                  </div>
+
+                  {/* Expandable Details Panel */}
+                  {isActive && (
+                    <div 
+                      className="mt-6 bg-white rounded-2xl p-6 shadow-xl border-2 border-primary/20"
+                      style={{ animation: 'slideUp 0.4s ease-out' }}
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-1 h-8 bg-gradient-to-b from-primary to-secondary rounded-full" />
+                        <h4 className="text-lg font-black text-gray-900">Action Steps</h4>
+                      </div>
+                      <div className="space-y-3">
+                        {guide.details.map((detail, detailIndex) => (
+                          <div key={detailIndex} className="flex items-start gap-3 group/item">
+                            <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-md group-hover/item:scale-110 transition-transform">
+                              <span className="text-white text-xs font-bold">{detailIndex + 1}</span>
+                            </div>
+                            <span className="text-sm text-gray-700 leading-relaxed pt-1">
+                              {detail}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
         </div>
 
-        {/* Quick Tips - Single Column on Mobile */}
-        <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 lg:gap-6">
-          <div className="relative group overflow-hidden rounded-2xl sm:rounded-3xl bg-white p-5 sm:p-6 lg:p-8 shadow-lg border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-[1.02]">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
-            <div className="relative">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl mb-3 shadow-lg">
-                💡
+        {/* Bottom Section - Split Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          
+          {/* Left - Stats & Info */}
+          <div className="space-y-6">
+            <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-primary/5 to-transparent rounded-2xl border-l-4 border-primary">
+              <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
+                <Clock className="w-7 h-7 text-white" />
               </div>
-              <h4 className="text-base sm:text-lg font-black text-primary mb-2">Pro Tip</h4>
-              <p className="text-xs sm:text-sm text-primary/70 leading-relaxed">
-                Compare multiple properties. Visit at different times of the day.
-              </p>
+              <div>
+                <h4 className="text-xl font-black text-gray-900 mb-1">Quick Process</h4>
+                <p className="text-sm text-gray-600">Complete your journey in as little as 2-3 weeks with our streamlined approach</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-secondary/5 to-transparent rounded-2xl border-l-4 border-secondary">
+              <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 shadow-lg">
+                <Sparkles className="w-7 h-7 text-white" />
+              </div>
+              <div>
+                <h4 className="text-xl font-black text-gray-900 mb-1">Expert Support</h4>
+                <p className="text-sm text-gray-600">Dedicated team available 24/7 to guide you through every single step</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-primary/5 to-transparent rounded-2xl border-l-4 border-primary">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-lg">
+                <CheckCircle className="w-7 h-7 text-white" />
+              </div>
+              <div>
+                <h4 className="text-xl font-black text-gray-900 mb-1">Guaranteed Results</h4>
+                <p className="text-sm text-gray-600">98% customer satisfaction rate with transparent processes</p>
+              </div>
             </div>
           </div>
 
-          <div className="relative group overflow-hidden rounded-2xl sm:rounded-3xl bg-white p-5 sm:p-6 lg:p-8 shadow-lg border border-secondary/20 hover:border-secondary/40 transition-all duration-300 hover:scale-[1.02]">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-secondary/10 to-transparent rounded-bl-full" />
-            <div className="relative">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center text-2xl mb-3 shadow-lg">
-                🎯
-              </div>
-              <h4 className="text-base sm:text-lg font-black text-primary mb-2">Best Practice</h4>
-              <p className="text-xs sm:text-sm text-primary/70 leading-relaxed">
-                Review all documents carefully. Consult with our experts.
-              </p>
-            </div>
-          </div>
+          {/* Right - CTA Card */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-3xl blur-2xl opacity-20" />
+            <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 sm:p-10 lg:p-12 shadow-2xl overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full" />
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-secondary/20 to-transparent rounded-tr-full" />
+              
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">
+                  <Play className="w-4 h-4 text-white" />
+                  <span className="text-xs text-white font-bold uppercase tracking-wider">Let's Get Started</span>
+                </div>
 
-          <div className="relative group overflow-hidden rounded-2xl sm:rounded-3xl bg-white p-5 sm:p-6 lg:p-8 shadow-lg border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-[1.02]">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
-            <div className="relative">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl mb-3 shadow-lg">
-                📚
-              </div>
-              <h4 className="text-base sm:text-lg font-black text-primary mb-2">Resources</h4>
-              <p className="text-xs sm:text-sm text-primary/70 leading-relaxed">
-                Contact our support team anytime for assistance.
-              </p>
-            </div>
-          </div>
-        </div>
+                <h3 className="text-3xl sm:text-4xl font-black text-white mb-4 leading-tight">
+                  Ready to Take
+                  <br />
+                  the First Step?
+                </h3>
+                
+                <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-8">
+                  Join thousands of satisfied property owners who trusted us with their investment journey
+                </p>
 
-        {/* CTA Section - Compact */}
-        <div className="mt-12 sm:mt-16 text-center">
-          <div className="inline-block bg-gradient-to-r from-primary via-secondary to-primary p-0.5 sm:p-1 rounded-2xl sm:rounded-3xl shadow-xl">
-            <div className="bg-white rounded-2xl sm:rounded-3xl px-6 py-5 sm:px-10 sm:py-7">
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-primary mb-2 sm:mb-3">Ready to Begin?</h3>
-              <p className="text-xs sm:text-sm text-primary/70 mb-4 sm:mb-5 max-w-md mx-auto">
-                Start your property journey today with expert guidance
-              </p>
-              <button className="px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-primary to-secondary text-white text-sm sm:text-base font-bold rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2 mx-auto">
-                Get Started Now
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-              </button>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button className="px-8 py-4 bg-white text-gray-900 rounded-xl font-bold text-base shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                    Start Now
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                  <button className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-bold text-base hover:bg-white/20 transition-all duration-300">
+                    Learn More
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,60 +1,65 @@
-import { Mail, Phone, MapPin, ArrowRight, Heart } from "lucide-react"
+import { Mail, Phone, MapPin, Heart, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
 
-export function Footer() {
+export   function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gradient-to-br from-primary via-primary/95 to-secondary relative overflow-hidden pt-16 pb-8">
+    <footer className="bg-gray-900 relative overflow-hidden">
       
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+        @keyframes shimmer {
+          0% { background-position: -1000px 0; }
+          100% { background-position: 1000px 0; }
         }
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
+        @keyframes heartbeat {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+        .animate-heartbeat {
+          animation: heartbeat 1.5s ease-in-out infinite;
         }
       `}</style>
 
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
-        <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl" />
-      </div>
+      {/* Top Accent Line */}
+      <div className="h-1 bg-gradient-to-r from-primary via-secondary to-primary" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         
-        {/* Top Section */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+        {/* Main Footer Content */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 mb-12">
           
-          {/* Brand Column */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-26 h-26 lg:w-36 lg:h-36  rounded-xl p-2 ">
+          {/* Brand Column - Spans 4 columns */}
+          <div className="lg:col-span-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-26 h-26   rounded-xl p-2 shadow-xl">
                 <img src="/Malaxmi-Final-Logo.-2png.png" alt="Logo" className="w-full h-full object-contain" />
               </div>
-              <span
-                style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
-                className="font-black text-white text-lg leading-tight"
-              >
-                Mahalaxmi<br/> Infra
-              </span>
+              <div>
+                <span
+                  style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
+                  className="font-black text-white text-xl block leading-tight"
+                >
+                  Mahalaxmi Infra
+                </span>
+                <span className="text-white/60 text-xs">Premium Real Estate</span>
+              </div>
             </div>
-            <p className="text-white/80 lg:ml-5 text-sm leading-relaxed">
-              Delivering premium real estate solutions with excellence and innovation since years.
+            <p className="text-white/70 text-sm leading-relaxed mb-6">
+              Delivering premium real estate solutions with excellence and innovation. Your trusted partner in property investment.
             </p>
+            
+        
           </div>
 
-          {/* Quick Links */}
-          <div className="lg:mt-10">
+          {/* Quick Links - Spans 2 columns */}
+          <div className="lg:col-span-2">
             <h4
               style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
-              className="font-black text-white text-lg mb-6 flex items-center gap-2"
+              className="font-black text-white text-base mb-5"
             >
-              <div className="w-1 h-6 bg-white rounded-full" />
               Quick Links
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {[
                 {href : "#about", label : "About Us"}, 
                 {href : "#amenities", label : "Amenities"}, 
@@ -65,9 +70,9 @@ export function Footer() {
                 <li key={link.href}>
                   <a 
                     href={link.href} 
-                    className="group flex items-center gap-2 text-white/80 hover:text-white transition-all text-sm"
+                    className="group flex items-center gap-2 text-white/60 hover:text-white transition-all text-sm"
                   >
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <div className="w-1 h-1 rounded-full bg-primary group-hover:w-2 transition-all" />
                     {link.label}
                   </a>
                 </li>
@@ -75,16 +80,15 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
-          <div className="lg:mt-10">
+          {/* Resources - Spans 2 columns */}
+          <div className="lg:col-span-2">
             <h4
               style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
-              className="font-black text-white text-lg mb-6 flex items-center gap-2"
+              className="font-black text-white text-base mb-5"
             >
-              <div className="w-1 h-6 bg-white rounded-full" />
               Resources
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {[
                 {label: "News & Updates", href: "#news"}, 
                 {href: "#testimonials", label: "Testimonials"}, 
@@ -95,9 +99,9 @@ export function Footer() {
                 <li key={link.href}>
                   <a 
                     href={link.href} 
-                    className="group flex items-center gap-2 text-white/80 hover:text-white transition-all text-sm"
+                    className="group flex items-center gap-2 text-white/60 hover:text-white transition-all text-sm"
                   >
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <div className="w-1 h-1 rounded-full bg-secondary group-hover:w-2 transition-all" />
                     {link.label}
                   </a>
                 </li>
@@ -105,68 +109,70 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div className="lg:mt-10">
+          {/* Contact Info - Spans 4 columns */}
+          <div className="lg:col-span-4">
             <h4
               style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
-              className="font-black text-white text-lg mb-6 flex items-center gap-2"
+              className="font-black text-white text-base mb-5"
             >
-              <div className="w-1 h-6 bg-white rounded-full" />
-              Get in Touch
+              Contact Us
             </h4>
-            <ul className="space-y-4">
-              <li>
+            <div className="space-y-4">
+              <div className="text-white/90 text-sm font-semibold mb-3">
                 Rajesh Ingle
-              </li>
-              <li>
-                <a 
-                  href="tel:+919822172379"
-                  className="group flex items-start gap-3 text-white/80 hover:text-white transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-all">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-white/60 mb-0.5">Call Us</p>
-                    <p className="text-sm font-semibold">+91 9822172379</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="mailto:rajeshgingle@gmail.com"
-                  className="group flex items-start gap-3 text-white/80 hover:text-white transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-all">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs text-white/60 mb-0.5">Email Us</p>
-                    <p className="text-sm font-semibold break-all">rajeshgingle@gmail.com</p>
-                  </div>
-                </a>
-              </li>
-              <li className="flex items-start gap-3 text-white/80">
-                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5" />
+              </div>
+              
+              <a 
+                href="tel:+919822172379"
+                className="group flex items-center gap-3 text-white/60 hover:text-white transition-colors"
+              >
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:from-primary group-hover:to-secondary transition-all">
+                  <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-xs text-white/60 mb-0.5">Visit Us</p>
-                  <p className="text-sm font-semibold">Nagpur, Maharashtra<br/>India 441106</p>
+                  <p className="text-xs text-white/50">Phone</p>
+                  <p className="text-sm font-semibold">+91 9822172379</p>
                 </div>
-              </li>
-            </ul>
+              </a>
+              
+              <a 
+                href="mailto:rajeshgingle@gmail.com"
+                className="group flex items-center gap-3 text-white/60 hover:text-white transition-colors"
+              >
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:from-primary group-hover:to-secondary transition-all">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-white/50">Email</p>
+                  <p className="text-sm font-semibold break-all">rajeshgingle@gmail.com</p>
+                </div>
+              </a>
+              
+              <div className="flex items-center gap-3 text-white/60">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 border border-white/10 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-xs text-white/50">Location</p>
+                  <p className="text-sm font-semibold">Nagpur, Maharashtra, India 441106</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-white/20 mb-8"></div>
+        {/* Divider with Gradient */}
+        <div className="relative h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8" />
 
         {/* Bottom Bar */}
-        <div className="flex justify-center items-center text-white/80 text-sm">
-          <p className="flex items-center gap-1">
-            © {currentYear} Mahalaxmi  Infra. Made with 
-            <Heart className="w-4 h-4 text-red-400 fill-red-400 animate-float" /> 
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-white/60 text-sm">
+          <p className="flex items-center gap-1.5">
+            © {currentYear} Mahalaxmi Infra. All rights reserved.
+          </p>
+          
+          <p className="flex items-center gap-1.5">
+            Made with 
+            <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-heartbeat" /> 
             in India
           </p>
         </div>

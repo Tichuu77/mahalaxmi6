@@ -1,6 +1,6 @@
 "use client"
 
-import { Wifi, Dumbbell, Trees, Zap, Shield, Users, Sparkles, Star, ChevronRight } from "lucide-react"
+import { Wifi, Dumbbell, Trees, Zap, Shield, Users, Sparkles, Star, ChevronRight, ArrowRight } from "lucide-react"
 import { useState } from "react"
 
 const amenities = [
@@ -78,7 +78,7 @@ const amenities = [
   },
 ]
 
-export  function AmenitiesSection() {
+export   function AmenitiesSection() {
   const [activeTab, setActiveTab] = useState("all")
   const [hoveredIndex, setHoveredIndex] = useState(null)
 
@@ -95,238 +95,222 @@ export  function AmenitiesSection() {
   ]
 
   return (
-    <section id="amenities" className="py-20 sm:py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section id="amenities" className="py-12 sm:py-20 lg:py-28 bg-white relative overflow-hidden">
       
-      {/* Wavy background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="wave" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path d="M0 50 Q 25 25, 50 50 T 100 50" stroke="currentColor" fill="none" strokeWidth="0.5" className="text-primary"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#wave)" />
-        </svg>
-      </div>
-
-      {/* Floating gradient orbs */}
-      <div className="absolute top-1/4 -left-20 w-72 h-72 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-gradient-to-bl from-secondary/20 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-secondary/3" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Asymmetric Header - Left Aligned */}
-        <div className="mb-16 sm:mb-20">
-          <div className="grid lg:grid-cols-2 gap-8 items-end">
-            <div>
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
-                  <Sparkles className="w-6 h-6 text-white animate-pulse" />
-                </div>
-                <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
+        {/* Compact Mobile Header */}
+        <div className="mb-8 sm:mb-12">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 rounded-full mb-3">
+                <Sparkles className="w-3 h-3 text-primary" />
+                <span className="text-xs text-primary font-bold uppercase tracking-wide">
+                  Amenities
+                </span>
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-primary mb-4 leading-tight">
-                Amenities That
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary via-primary to-secondary">
-                  Define Luxury
+              
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-2">
+                Luxury{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                  Lifestyle
                 </span>
               </h2>
-              <p className="text-base sm:text-lg text-primary/70 leading-relaxed max-w-xl">
-                Every feature thoughtfully designed to elevate your lifestyle and create unforgettable experiences
+              
+              <p className="text-sm sm:text-lg text-gray-600 leading-relaxed">
+                World-class facilities for modern living
               </p>
             </div>
 
-            {/* Stats Cards - Right Side */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4">
-              <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-200 text-center">
-                <div className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">12+</div>
-                <div className="text-xs text-gray-600 font-semibold mt-1">Amenities</div>
-              </div>
-              <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-200 text-center">
-                <div className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-secondary to-primary">24/7</div>
-                <div className="text-xs text-gray-600 font-semibold mt-1">Available</div>
-              </div>
-              <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-200 text-center">
-                <div className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-tcol">100%</div>
-                <div className="text-xs text-gray-600 font-semibold mt-1">Premium</div>
-              </div>
+            {/* Mobile Stats Badge */}
+            <div className="bg-gradient-to-br from-primary to-secondary rounded-2xl p-3 sm:p-4 shadow-xl text-white text-center min-w-[70px] sm:min-w-[90px]">
+              <div className="text-2xl sm:text-3xl font-black">12+</div>
+              <div className="text-[10px] sm:text-xs font-semibold opacity-90">Features</div>
             </div>
           </div>
         </div>
 
-        {/* Vertical Tab Layout */}
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
-          
-          
-          {/* Left Sidebar - Category Tabs */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-3">
-              {categories.map(tab => {
-                const TabIcon = tab.icon
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`w-full group relative px-5 py-4 rounded-2xl text-left font-bold transition-all duration-300 ${
-                      activeTab === tab.id
-                        ? "bg-gradient-to-r from-primary to-secondary text-white shadow-xl scale-105"
-                        : "bg-white text-gray-700 border-2 border-gray-200 hover:border-primary/50 hover:shadow-lg"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
-                        activeTab === tab.id 
-                          ? "bg-white/20" 
-                          : "bg-gray-100 group-hover:bg-primary/10"
-                      }`}>
-                        <TabIcon className={`w-5 h-5 ${
-                          activeTab === tab.id ? "text-white" : "text-primary"
-                        }`} />
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-sm sm:text-base">{tab.label}</div>
-                        <div className={`text-xs ${activeTab === tab.id ? "text-white/80" : "text-gray-500"}`}>
-                          {amenities.filter(a => tab.id === "all" || a.category === tab.id).length} items
-                        </div>
-                      </div>
-                      <ChevronRight className={`w-5 h-5 transition-transform ${
-                        activeTab === tab.id ? "translate-x-1 text-white" : "text-gray-400"
-                      }`} />
-                    </div>
-                  </button>
-                )
-              })}
-            </div>
+        {/* Scrollable Category Tabs - Mobile Optimized */}
+        <div className="mb-8 sm:mb-10 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex gap-2 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide sm:justify-center">
+            {categories.map(tab => {
+              const TabIcon = tab.icon
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`snap-start flex-shrink-0 px-4 py-2.5 rounded-xl font-bold transition-all duration-300 flex items-center gap-2 ${
+                    activeTab === tab.id
+                      ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  <TabIcon className={`w-4 h-4 ${activeTab === tab.id ? "text-white" : "text-primary"}`} />
+                  <span className="text-sm whitespace-nowrap">{tab.label}</span>
+                  <span className={`text-xs px-1.5 py-0.5 rounded-full ${
+                    activeTab === tab.id 
+                      ? "bg-white/20 text-white" 
+                      : "bg-white text-gray-600"
+                  }`}>
+                    {amenities.filter(a => tab.id === "all" || a.category === tab.id).length}
+                  </span>
+                </button>
+              )
+            })}
           </div>
+        </div>
 
-          {/* Right Content - Amenities Grid */}
-          <div className="lg:col-span-4">
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
+        {/* Horizontal Scroll Cards - Mobile First */}
+        <div className="mb-10 sm:mb-12">
+          <div className="lg:hidden -mx-4 px-4">
+            <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
               {filteredAmenities.map((amenity, index) => {
                 const Icon = amenity.icon
-                const isHovered = hoveredIndex === index
                 
                 return (
                   <div
                     key={index}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    className="group relative bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 hover:border-primary/30 overflow-hidden"
+                    className="snap-start flex-shrink-0 w-[160px] bg-white rounded-2xl p-4 shadow-lg border-2 border-gray-100"
                   >
-                    {/* Animated background gradient */}
-                    <div className={`absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent transition-opacity duration-500 ${
-                      isHovered ? "opacity-100" : "opacity-0"
-                    }`}></div>
-                    
-                    {/* Corner accent */}
-                    <div className="absolute top-0 right-0 w-12 h-12 sm:w-20 sm:h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full"></div>
-                    
-                    <div className="relative z-10">
-                      {/* Icon with animated ring */}
-                      <div className="relative w-12 h-12 sm:w-20 sm:h-20 mx-auto mb-2 sm:mb-5">
-                        {/* Outer ring */}
-                        <div className={`absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-secondary transition-transform duration-500 ${
-                          isHovered ? "scale-110 rotate-12" : "scale-100 rotate-0"
-                        }`}></div>
-                        {/* Inner white bg */}
-                        <div className="absolute inset-0.5 sm:inset-1 bg-white rounded-lg sm:rounded-xl"></div>
-                        {/* Icon container */}
-                        <div className={`absolute inset-0 flex items-center justify-center transition-transform duration-500 ${
-                          isHovered ? "scale-110" : "scale-100"
-                        }`}>
-                          {amenity.emoji ? (
-                            <span className="text-xl sm:text-4xl">{amenity.emoji}</span>
-                          ) : (
-                            <Icon className="w-5 h-5 sm:w-9 sm:h-9 text-primary" />
-                          )}
-                        </div>
-                      </div>
-                      
-                      {/* Content */}
-                      <div className="text-center">
-                        <h3 className="text-xs sm:text-base lg:text-lg font-black text-gray-900 mb-1 sm:mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                          {amenity.title}
-                        </h3>
-                        <p className="text-[10px] sm:text-xs lg:text-sm text-gray-600 leading-relaxed mb-2 sm:mb-4 line-clamp-2">
-                          {amenity.description}
-                        </p>
-
-                        {/* Divider */}
-                        <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-2 sm:mb-3"></div>
-
-                        {/* Category pill */}
-                        <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary text-[9px] sm:text-xs font-bold rounded-full">
-                          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-primary"></div>
-                          {amenity.category.charAt(0).toUpperCase() + amenity.category.slice(1)}
-                        </span>
-                      </div>
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                      {amenity.emoji ? (
+                        <span className="text-2xl">{amenity.emoji}</span>
+                      ) : (
+                        <Icon className="w-6 h-6 text-white" />
+                      )}
                     </div>
+                    
+                    <h3 className="text-sm font-black text-gray-900 mb-1 text-center line-clamp-1">
+                      {amenity.title}
+                    </h3>
+                    <p className="text-xs text-gray-600 text-center line-clamp-2 mb-2">
+                      {amenity.description}
+                    </p>
+
+                    <div className="h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full" />
                   </div>
                 )
               })}
             </div>
+          </div>
 
+          {/* Desktop Grid */}
+          <div className="hidden lg:grid grid-cols-4 gap-5">
+            {filteredAmenities.map((amenity, index) => {
+              const Icon = amenity.icon
+              const isHovered = hoveredIndex === index
+              
+              return (
+                <div
+                  key={index}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="group bg-white rounded-2xl p-5 shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 hover:border-primary/30"
+                >
+                  <div className={`w-16 h-16 mx-auto mb-3 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center transition-transform duration-500 ${
+                    isHovered ? "scale-110 rotate-6" : "scale-100"
+                  }`}>
+                    {amenity.emoji ? (
+                      <span className="text-3xl">{amenity.emoji}</span>
+                    ) : (
+                      <Icon className="w-8 h-8 text-white" />
+                    )}
+                  </div>
+                  
+                  <h3 className="text-base font-black text-gray-900 mb-1 text-center group-hover:text-primary transition-colors">
+                    {amenity.title}
+                  </h3>
+                  <p className="text-xs text-gray-600 text-center mb-3">
+                    {amenity.description}
+                  </p>
+
+                  <span className="inline-flex w-full justify-center items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary text-xs font-bold rounded-full">
+                    {amenity.category.charAt(0).toUpperCase() + amenity.category.slice(1)}
+                  </span>
+                </div>
+              )
+            })}
           </div>
         </div>
 
-        {/* Bottom CTA Card - Full Width */}
-        <div className="mt-10 lg:mt-12 bg-gradient-to-br from-primary via-secondary to-primary rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-40 h-40 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 right-0 w-60 h-60 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3"></div>
+        {/* Stacked Bottom Section - Mobile Optimized */}
+        <div className="space-y-6">
           
-          <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
-            <div className="flex-1 text-center sm:text-left">
-              <h3 className="text-2xl sm:text-3xl font-black text-white mb-3">
+          {/* CTA First on Mobile */}
+          <div className="bg-gradient-to-br from-primary via-secondary to-primary rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div className="relative z-10">
+              <h3 className="text-xl sm:text-3xl font-black text-white mb-2 sm:mb-3">
                 Want to Know More?
               </h3>
-              <p className="text-white/90 text-sm sm:text-base leading-relaxed">
-                Get detailed information about amenities specific to your preferred project location
+              <p className="text-white/90 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
+                Get detailed information about amenities
               </p>
+              <a 
+                href="#contact" 
+                className="group inline-flex items-center gap-2 px-5 py-3 bg-white text-primary rounded-xl font-bold text-sm sm:text-base shadow-xl hover:scale-105 transition-all"
+              >
+                Contact Us
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
-            <a 
-              href="#contact" 
-              className="group px-8 py-4 bg-white text-primary rounded-2xl font-bold text-base shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
-            >
-              Contact Us
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
+          </div>
+
+          {/* Feature Grid - 2x2 on Mobile */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {[
+              { label: "Vastu Compliant", value: "100%", gradient: "from-primary to-secondary" },
+              { label: "Security", value: "24/7", gradient: "from-secondary to-primary" },
+              { label: "Maintenance", value: "Premium", gradient: "from-primary to-tcol" },
+              { label: "Warranty", value: "Assured", gradient: "from-tcol to-secondary" }
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl p-4 sm:p-5 shadow-lg border border-gray-200"
+              >
+                <div className={`text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r ${item.gradient} mb-1 sm:mb-2`}>
+                  {item.value}
+                </div>
+                <div className="text-xs sm:text-sm text-gray-700 font-semibold">
+                  {item.label}
+                </div>
+                <div className={`h-1 w-10 bg-gradient-to-r ${item.gradient} rounded-full mt-2`}></div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom Stats - Horizontal on Mobile */}
+          <div className="flex gap-3 sm:grid sm:grid-cols-3 sm:gap-4">
+            <div className="flex-1 bg-white rounded-xl p-4 shadow-lg border border-gray-200 text-center">
+              <div className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary mb-1">12+</div>
+              <div className="text-xs sm:text-sm text-gray-600 font-semibold">Amenities</div>
+            </div>
+            <div className="flex-1 bg-white rounded-xl p-4 shadow-lg border border-gray-200 text-center">
+              <div className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-secondary to-primary mb-1">24/7</div>
+              <div className="text-xs sm:text-sm text-gray-600 font-semibold">Available</div>
+            </div>
+            <div className="flex-1 bg-white rounded-xl p-4 shadow-lg border border-gray-200 text-center">
+              <div className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-tcol mb-1">100%</div>
+              <div className="text-xs sm:text-sm text-gray-600 font-semibold">Premium</div>
+            </div>
           </div>
         </div>
-
-      {/* Bottom Feature Highlights */}
-     <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-  {[
-    { label: "Vastu Compliant", value: "100%", gradient: "from-primary to-secondary" },
-    { label: "Security", value: "24/7", gradient: "from-secondary to-primary" },
-    { label: "Maintenance", value: "Premium", gradient: "from-primary to-tcol" },
-    { label: "Warranty", value: "Assured", gradient: "from-primary to-secondary" }
-  ].map((item, idx) => (
-    <div
-      key={idx}
-      className="bg-white rounded-xl p-3 sm:p-4 shadow-md border border-gray-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
-    >
-      <div
-        className={`text-xl sm:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${item.gradient} mb-1`}
-      >
-        {item.value}
-      </div>
-
-      <div className="text-xs sm:text-sm text-gray-700 font-semibold">
-        {item.label}
-      </div>
-
-      <div
-        className={`h-1 w-10 bg-gradient-to-r ${item.gradient} rounded-full mt-2`}
-      ></div>
-    </div>
-  ))}
-</div>
-
-
         
       </div>
+
+      <style>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </section>
   )
 }
