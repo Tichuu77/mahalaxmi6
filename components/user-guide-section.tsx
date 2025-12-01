@@ -270,13 +270,13 @@ export   function UserGuideSection() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="px-8 py-4 bg-white text-gray-900 rounded-xl font-bold text-base shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                  <a href="#contact" className="px-8 py-4 bg-white text-gray-900 rounded-xl font-bold text-base shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
                     Start Now
                     <ArrowRight className="w-5 h-5" />
-                  </button>
-                  <button className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-bold text-base hover:bg-white/20 transition-all duration-300">
+                  </a>
+                  <a href="#contact" className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-bold text-base hover:bg-white/20 transition-all duration-300">
                     Learn More
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

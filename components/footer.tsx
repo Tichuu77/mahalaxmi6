@@ -119,11 +119,11 @@ export   function Footer() {
             </h4>
             <div className="space-y-4">
               <div className="text-white/90 text-sm font-semibold mb-3">
-                Rajesh Ingle
+                Pranali Patil
               </div>
               
               <a 
-                href="tel:+919822172379"
+                href="tel:+919168058124"
                 className="group flex items-center gap-3 text-white/60 hover:text-white transition-colors"
               >
                 <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:from-primary group-hover:to-secondary transition-all">
@@ -131,12 +131,12 @@ export   function Footer() {
                 </div>
                 <div>
                   <p className="text-xs text-white/50">Phone</p>
-                  <p className="text-sm font-semibold">+91 9822172379</p>
+                  <p className="text-sm font-semibold">+91 9168058124</p>
                 </div>
               </a>
               
               <a 
-                href="mailto:rajeshgingle@gmail.com"
+                href="mailto:iime.pranali@gmail.com"
                 className="group flex items-center gap-3 text-white/60 hover:text-white transition-colors"
               >
                 <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:from-primary group-hover:to-secondary transition-all">
@@ -144,7 +144,7 @@ export   function Footer() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-xs text-white/50">Email</p>
-                  <p className="text-sm font-semibold break-all">rajeshgingle@gmail.com</p>
+                  <p className="text-sm font-semibold break-all">iime.pranali@gmail.com</p>
                 </div>
               </a>
               

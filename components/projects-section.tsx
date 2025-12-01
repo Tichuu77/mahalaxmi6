@@ -147,7 +147,7 @@ function ProjectCard({ project }: { project: Project }) {
 
   const handleWhatsApp = () => {
     const message = `Hi, I'm interested in ${project.title}. Please share more details.`
-    const url = `https://wa.me/+919822172379?text=${encodeURIComponent(message)}`
+    const url = `https://wa.me/+919168058124?text=${encodeURIComponent(message)}`
     window.open(url, "_blank")
   }
 
@@ -360,7 +360,7 @@ export   function ProjectsSection() {
                   <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="tel:+919822172379"
+                  href="tel:+919168058124"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary border-2 border-primary rounded-xl font-bold hover:bg-primary/5 transition-all"
                 >
                   Call Now

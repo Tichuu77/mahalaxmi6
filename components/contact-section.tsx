@@ -259,7 +259,7 @@ export default function ContactSection() {
             <div className="space-y-4">
               {/* Phone */}
               <a 
-                href="tel:+919822172379"
+                href="tel:+919168058124"
                 className="block group"
                 style={{ animation: 'slideInLeft 0.5s ease-out' }}
               >
@@ -271,7 +271,7 @@ export default function ContactSection() {
                     <div className="flex-1">
                       <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Call Us</div>
                       <div className="text-gray-900 font-bold text-lg group-hover:text-primary transition-colors">
-                        +91 9822172379
+                        +91 9168058124
                       </div>
                     </div>
                   </div>
@@ -284,7 +284,7 @@ export default function ContactSection() {
 
               {/* Email */}
               <a 
-                href="mailto:rajeshgingle@gmail.com"
+                href="mailto:iime.pranali@gmail.com"
                 className="block group"
                 style={{ animation: 'slideInLeft 0.5s ease-out', animationDelay: '0.1s' }}
               >
@@ -296,7 +296,7 @@ export default function ContactSection() {
                     <div className="flex-1 min-w-0">
                       <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Email Us</div>
                       <div className="text-gray-900 font-bold text-sm group-hover:text-secondary transition-colors truncate">
-                        rajeshgingle@gmail.com
+                       iime.pranali@gmail.com
                       </div>
                     </div>
                   </div>

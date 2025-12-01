@@ -239,7 +239,7 @@ export   function FAQSection() {
                 
                 <div className="space-y-3">
                   <a
-                    href="tel:+919822172379"
+                    href="tel:+919168058124"
                     className="flex items-center gap-3 text-white hover:text-white/80 transition-colors group/link"
                   >
                     <div className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center group-hover/link:bg-white/20 transition-colors">
@@ -247,7 +247,7 @@ export   function FAQSection() {
                     </div>
                     <div>
                       <div className="text-xs text-white/60">Call Us</div>
-                      <div className="text-sm font-bold">+91 9822172379</div>
+                      <div className="text-sm font-bold">+91 9168058124</div>
                     </div>
                   </a>
                   
