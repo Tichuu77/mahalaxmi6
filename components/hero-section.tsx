@@ -140,13 +140,13 @@ export default function HeroSection() {
 
                 {/* Projects Card */}
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 min-w-[140px]">
-                  <div className="text-3xl font-black text-primary mb-1">15+</div>
+                  <div className="text-3xl font-black text-primary mb-1">67+</div>
                   <div className="text-xs text-white/80 font-medium">Projects Completed</div>
                 </div>
 
                 {/* Clients Card */}
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 min-w-[140px]">
-                  <div className="text-3xl font-black text-secondary mb-1">500+</div>
+                  <div className="text-3xl font-black text-secondary mb-1">17000+</div>
                   <div className="text-xs text-white/80 font-medium">Happy Clients</div>
                 </div>
 
@@ -175,7 +175,7 @@ export default function HeroSection() {
                   <div className="text-xs text-white/70">Certified</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-black text-primary mb-1">15+</div>
+                  <div className="text-2xl font-black text-primary mb-1">13+</div>
                   <div className="text-xs text-white/70">Years Experience</div>
                 </div>
                 <div className="text-center">

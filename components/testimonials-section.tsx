@@ -3,35 +3,35 @@
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Star, Quote, Award, Heart, ThumbsUp } from "lucide-react"
 
-const testimonials = [
-  {
-    id: 1,
-    content:
-      "Investing in a by Maha Laxmi  Infra transparent process made effortless experience. The best decision I ever made. The local transparent process made it an effortless experience.",
-    name: "Rajkumar Gharjale",
-    location: "Nagpur",
-    image: "https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/06/1-9.png",
-    rating: 5,
-  },
-  {
-    id: 2,
-    content:
-      "I wanted to invest in a growing area, and plots in Nagpur Besa seemed perfect. Maha Laxmi  Infra exceeded my expectations. Highly recommended!",
-    name: "Priya Shah",
-    location: "Mumbai",
-    image: "https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/06/3-4.png",
-    rating: 5,
-  },
-  {
-    id: 3,
-    content:
-      "Investing in residential plots with Mahalaxmi  Infra was one of my best decisions. Their transparency, clear titles, and prompt assistance gave me peace of mind.",
-    name: "Karan Akojwar",
-    location: "Pune",
-    image: "https://pk.mahalaxmidevelopers.com/wp-content/uploads/2025/06/4-2.png",
-    rating: 5,
-  },
-]
+  const testimonials = [
+    {
+      id: 1,
+      content:
+        "Investing in a by Maha Laxmi Developers transparent process made effortless experience. The best decision I ever made. The local transparent process made it an effortless experience.",
+      name: "Rajkumar Gharjale",
+      location: "Nagpur",
+      image: "/testonomials1.webp",
+      rating: 5,
+    },
+    {
+      id: 2,
+      content:
+        "I wanted to invest in a growing area, and plots in Nagpur Besa seemed perfect. Maha Laxmi Developers exceeded my expectations. Highly recommended!",
+      name: "Priya Shah",
+      location: "Mumbai",
+      image: "/testonomials2.jpg",
+      rating: 5,
+    },
+    {
+      id: 3,
+      content:
+        "Investing in residential plots with Mahalaxmi Developers was one of my best decisions. Their transparency, clear titles, and prompt assistance gave me peace of mind.",
+      name: "Karan Akojwar",
+      location: "Pune",
+      image: "/testonomials3.jpg",
+      rating: 5,
+    },
+  ]
 
 export   function TestimonialsSection() {
   const [current, setCurrent] = useState(0)
@@ -291,7 +291,7 @@ export   function TestimonialsSection() {
             <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
               <div>
                 <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-3">
-                  500+
+                  17000+
                 </div>
                 <div className="text-white/90 text-sm sm:text-base font-semibold mb-1">Happy Clients</div>
                 <div className="text-white/60 text-xs">Across India</div>
