@@ -140,7 +140,7 @@ export default function HeroSection() {
 
                 {/* Projects Card */}
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 min-w-[140px]">
-                  <div className="text-3xl font-black text-primary mb-1">67+</div>
+                  <div className="text-3xl font-black text-primary mb-1">70+</div>
                   <div className="text-xs text-white/80 font-medium">Projects Completed</div>
                 </div>
 

@@ -363,7 +363,7 @@ export default function ContactSection() {
                       <CheckCircle className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <p className="font-bold text-white text-sm">500+ Happy Clients</p>
+                      <p className="font-bold text-white text-sm">17000+ Happy Clients</p>
                       <p className="text-xs text-white/70">Join our satisfied customers</p>
                     </div>
                   </div>
