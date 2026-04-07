@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Award, Users, Building2, CheckCircle2, TrendingUp, Shield, Home, Target, Sparkles } from "lucide-react"
+import Image from "next/image"
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -184,10 +185,12 @@ export default function AboutSection() {
             
             {/* Main Image */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[500px]">
-              <img
+              <Image
                 src="/aboutUs.webp"
                 alt="About Mahalaxmi Infra"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </div>

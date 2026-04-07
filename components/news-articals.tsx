@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Calendar, User, ArrowRight, Sparkles, ChevronRight } from "lucide-react"
+import Image from "next/image"
 
 const newsArticles = [
   {
@@ -93,10 +94,13 @@ export default function NewsArticles() {
               
               {/* Image */}
               <div className="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
-                <img
+                <Image
                   src={selectedArticle.image}
                   alt={selectedArticle.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  priority={selectedArticle.id === 1}
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                 
@@ -163,10 +167,12 @@ export default function NewsArticles() {
               >
                 <div className="flex gap-4">
                   <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                    <img
+                    <Image
                       src={article.image}
                       alt={article.title}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="80px"
+                      className="object-cover"
                     />
                   </div>
                   

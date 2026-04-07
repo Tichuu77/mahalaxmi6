@@ -1,24 +1,26 @@
-import { Navigation } from "@/components/navigation"
-import HeroSection from "@/components/hero-section"
-import AboutSection from "@/components/about-section"
-import { AmenitiesSection } from "@/components/amenities-section"
-import { ProjectsSection } from "@/components/projects-section"
-import { GallerySection } from "@/components/gallery-section"
-import { WhyChooseUsSection } from "@/components/why-choose-us-section"
-import { UserGuideSection } from "@/components/user-guide-section"
-import { TestimonialsSection } from "@/components/testimonials-section"
-import { FAQSection } from "@/components/faq-section"
-import ContactSection from "@/components/contact-section"
-import { Footer } from "@/components/footer"
-import CallButton from "@/components/call-button"
-import WhatsappButton from "@/components/whatsapp-button"
-import NewsArticles from "@/components/news-articals"
+import dynamic from "next/dynamic"
+
+const Navigation = dynamic(() => import("@/components/navigation").then((mod) => mod.Navigation))
+const HeroSection = dynamic(() => import("@/components/hero-section"))
+const AboutSection = dynamic(() => import("@/components/about-section"))
+const AmenitiesSection = dynamic(() => import("@/components/amenities-section").then((mod) => mod.AmenitiesSection))
+const ProjectsSection = dynamic(() => import("@/components/projects-section").then((mod) => mod.ProjectsSection))
+const GallerySection = dynamic(() => import("@/components/gallery-section").then((mod) => mod.GallerySection))
+const WhyChooseUsSection = dynamic(() => import("@/components/why-choose-us-section").then((mod) => mod.WhyChooseUsSection))
+const UserGuideSection = dynamic(() => import("@/components/user-guide-section").then((mod) => mod.UserGuideSection))
+const TestimonialsSection = dynamic(() => import("@/components/testimonials-section").then((mod) => mod.TestimonialsSection))
+const NewsArticles = dynamic(() => import("@/components/news-articals"))
+const FAQSection = dynamic(() => import("@/components/faq-section").then((mod) => mod.FAQSection))
+const ContactSection = dynamic(() => import("@/components/contact-section"))
+const Footer = dynamic(() => import("@/components/footer").then((mod) => mod.Footer))
+const CallButton = dynamic(() => import("@/components/call-button"))
+const WhatsappButton = dynamic(() => import("@/components/whatsapp-button"))
 
 export default function Home() {
   return (
-    <main >
+    <main>
       <Navigation />
-      <HeroSection/>
+      <HeroSection />
       <AboutSection />
       <AmenitiesSection />
       <ProjectsSection />
@@ -26,10 +28,10 @@ export default function Home() {
       <WhyChooseUsSection />
       <UserGuideSection />
       <TestimonialsSection />
-      <NewsArticles/>
+      <NewsArticles />
       <FAQSection />
       <ContactSection />
-       <CallButton/>
+      <CallButton />
       <WhatsappButton />
       <Footer />
     </main>
