@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Star, Quote, Award, Heart, ThumbsUp } from "lucide-react"
+import Image from "next/image"
 
   const testimonials = [
     {
@@ -147,9 +148,12 @@ export   function TestimonialsSection() {
                 }`}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <img
+                  <Image
                     src={testimonial.image}
                     alt={testimonial.name}
+                    width={40}
+                    height={40}
+                    sizes="40px"
                     className="w-10 h-10 rounded-full object-cover border-2 border-white/50"
                   />
                   <div className="flex-1 min-w-0">
@@ -207,9 +211,12 @@ export   function TestimonialsSection() {
                       <div className="flex items-center gap-6 pt-8 border-t-2 border-gray-100">
                         <div className="relative">
                           <div className="absolute -inset-2 bg-gradient-to-br from-primary to-secondary rounded-full blur-lg opacity-30" />
-                          <img
+                          <Image
                             src={testimonial.image}
                             alt={testimonial.name}
+                            width={80}
+                            height={80}
+                            sizes="80px"
                             className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-white shadow-xl"
                           />
                           <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center border-2 border-white shadow-lg">

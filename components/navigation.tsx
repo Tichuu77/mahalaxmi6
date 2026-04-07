@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -24,7 +25,7 @@ export function Navigation() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer">
-            <img src="/Mahalaxmi Infra new Logo.png" alt="Logo" className=" w-20 h-20" />
+            <Image src="/Mahalaxmi Infra new Logo.png" alt="Mahalaxmi Infra logo" width={80} height={80} className="w-20 h-20" priority />
             <span
               style={{ fontFamily: "var(--font-heading, Poppins, sans-serif)" }}
               className="font-bold text-primary text-xl"

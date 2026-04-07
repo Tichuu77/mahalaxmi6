@@ -1,4 +1,5 @@
-import { Mail, Phone, MapPin, Heart, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import { Mail, Phone, MapPin, Heart } from "lucide-react"
+import Image from "next/image"
 
 export   function Footer() {
   const currentYear = new Date().getFullYear()
@@ -32,7 +33,7 @@ export   function Footer() {
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-26 h-26   rounded-xl p-2 shadow-xl">
-                <img src="/Malaxmi-Final-Logo.-2png.png" alt="Logo" className="w-full h-full object-contain" />
+                <Image src="/Malaxmi-Final-Logo.-2png.png" alt="Mahalaxmi Infra logo" width={96} height={96} sizes="96px" className="w-full h-full object-contain" />
               </div>
               <div>
                 <span

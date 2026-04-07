@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { ArrowRight, MapPin, Phone, Building2, Sparkles, Star, ChevronRight } from "lucide-react"
+import Image from "next/image"
 
 type Project = {
   id: number
@@ -156,10 +157,12 @@ function ProjectCard({ project }: { project: Project }) {
       
       {/* Image Container - Top */}
       <div className="relative h-56 overflow-hidden">
-        <img
+        <Image
           src={project.image || "/placeholder.svg"}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { X, ChevronLeft, ChevronRight, ZoomIn, Grid3x3, Camera } from "lucide-react"
+import Image from "next/image"
 
 const galleryItems = [
   { id: 1, src: "/gallery1.jpg", alt: "Morning View", category: "exterior" },
@@ -160,10 +161,12 @@ export   function GallerySection() {
                 >
                   <div className="relative overflow-hidden rounded-2xl shadow-2xl h-[400px]">
                     {/* Image */}
-                    <img
+                    <Image
                       src={item.src}
                       alt={item.alt}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="85vw"
+                      className="object-cover"
                     />
 
                     {/* Overlay */}
@@ -219,10 +222,12 @@ export   function GallerySection() {
               className="group relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 hover:shadow-2xl aspect-square"
             >
               {/* Image */}
-              <img
+              <Image
                 src={item.src}
                 alt={item.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                fill
+                sizes="(max-width: 1024px) 50vw, 25vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
 
               {/* Overlay */}
@@ -298,9 +303,11 @@ export   function GallerySection() {
         >
           <div className="relative max-w-6xl w-full h-[85vh]" onClick={(e) => e.stopPropagation()}>
             {/* Main image */}
-            <img
-              src={galleryItems.find((item) => item.id === selectedId)?.src}
+            <Image
+              src={galleryItems.find((item) => item.id === selectedId)?.src || "/placeholder.svg"}
               alt="Gallery"
+              fill
+              sizes="100vw"
               className="w-full h-full object-contain rounded-2xl"
             />
             
